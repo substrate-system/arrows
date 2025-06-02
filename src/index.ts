@@ -1,98 +1,95 @@
-import { createDebug } from '@substrate-system/debug'
-const debug = createDebug()
+import { WebComponent } from '@substrate-system/web-component'
+import { back, next } from './svg.js'
+import Debug from '@substrate-system/debug'
+const debug = Debug()
 
 // for docuement.querySelector
 declare global {
     interface HTMLElementTagNameMap {
-        'substrate-back': Example
+        'substrate-back': SubstrateBack
+        'substreate-next': SubstrateNext
     }
 }
 
-export class Example extends HTMLElement {
-    // Define the attributes to observe
-    // need this for `attributeChangedCallback`
-    static observedAttributes = ['example']
+export class SubstrateNext extends WebComponent.create('substrate-next') {
+    static observedAttributes = ['disabled']
 
-    example:string|null
-
-    constructor () {
-        super()
-        const example = this.getAttribute('example')
-        this.example = example
-
-        this.innerHTML = `<div>
-            <p>example</p>
-            <ul>
-                ${Array.from(this.children).filter(Boolean).map(node => {
-                    return `<li>${node.outerHTML}</li>`
-                }).join('')}
-            </ul>
-        </div>`
-    }
-
-    /**
-     * Handle 'example' attribute changes
-     * @see {@link https://gomakethings.com/how-to-detect-when-attributes-change-on-a-web-component/#organizing-your-code Go Make Things article}
-     *
-     * @param  {string} oldValue The old attribute value
-     * @param  {string} newValue The new attribute value
-     */
-    handleChange_example (oldValue:string, newValue:string) {
-        debug('handling example change', oldValue, newValue)
-
-        if (newValue === null) {
-            // [example] was removed
-        } else {
-            // set [example] attribute
-        }
-    }
-
-    /**
-     * Runs when the value of an attribute is changed
-     *
-     * @param  {string} name     The attribute name
-     * @param  {string} oldValue The old attribute value
-     * @param  {string} newValue The new attribute value
-     */
-    attributeChangedCallback (name:string, oldValue:string, newValue:string) {
-        debug('an attribute changed', name)
-        const handler = this[`handleChange_${name}`];
-        (handler && handler(oldValue, newValue))
+    connectedCallback () {
         this.render()
     }
 
-    disconnectedCallback () {
-        debug('disconnected')
+    addEventListener<K extends keyof HTMLElementEventMap> (
+        type:K,
+        listener:(this:HTMLElement, ev:HTMLElementEventMap[K])=>any,
+        options?:boolean|AddEventListenerOptions
+    ):void {
+        return this.qs('button')?.addEventListener(type, listener, options)
+    }
+
+    removeEventListener<K extends keyof HTMLElementEventMap> (
+        type:K,
+        listener:(this:HTMLElement, ev:HTMLElementEventMap[K])=>any,
+        options?:boolean|AddEventListenerOptions
+    ):void {
+        return this.qs('button')?.removeEventListener(type, listener, options)
+    }
+
+    render () {
+        this.innerHTML = `<button>
+            ${next}
+            <span class="visually-hidden">Next</span>
+        </button>`
+    }
+}
+
+export class SubstrateBack extends WebComponent.create('substrate-back') {
+    static observedAttributes = ['disabled']
+
+    /**
+     * Handle 'disabled' attribute changes
+     * @see {@link https://gomakethings.com/how-to-detect-when-attributes-change-on-a-web-component/#organizing-your-code Go Make Things article}
+     */
+    handleChange_disabled (oldValue:string, newValue:string) {
+        if (newValue === null) {
+            // was removed
+            this.disabled = false
+        } else {
+            this.disabled = true
+        }
+    }
+
+    get disabled ():boolean {
+        return !!(this.qs('button')?.hasAttribute('disabled'))
+    }
+
+    set disabled (value:boolean) {
+        const btn = this.qs('button')
+        if (value) {
+            // disable
+            btn?.setAttribute('disabled', '' + true)
+            if (this.hasAttribute('disabled')) return
+            this.setAttribute('disabled', '')
+        } else {
+            // enable
+            if (!this.hasAttribute('disabled')) return
+            this.removeAttribute('disabled')
+            btn?.removeAttribute('disabled')
+        }
     }
 
     connectedCallback () {
-        debug('connected')
-
-        const observer = new MutationObserver(function (mutations) {
-            mutations.forEach((mutation) => {
-                if (mutation.addedNodes.length) {
-                    debug('Node added: ', mutation.addedNodes)
-                }
-            })
-        })
-
-        observer.observe(this, { childList: true })
-
         this.render()
     }
 
     render () {
-        this.innerHTML = `<div>
-            <p>example</p>
-            <ul>
-                ${Array.from(this.children).filter(Boolean).map(node => {
-                    return `<li>${node.outerHTML}</li>`
-                }).join('')}
-            </ul>
-        </div>`
+        this.innerHTML = `<button${this.disabled ? ' disabled' : ''}>
+            ${back}
+            <span class="visually-hidden">Back</span>
+        </button$>`
     }
 }
 
 if ('customElements' in window) {
-    customElements.define('substrate-back', Example)
+    SubstrateBack.define()
+    SubstrateNext.define()
 }

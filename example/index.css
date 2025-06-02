@@ -1,0 +1,22 @@
+button {
+    cursor: pointer;
+
+    &:disabled {
+        cursor: initial;
+    }
+}
+
+substrate-next, substrate-back {
+    /*
+        disabled attribute doesn't work on the custom element
+    */
+    &:disabled {
+        opacity: 0.4;
+    }
+
+    & button {
+        &:disabled {
+            opacity: 0.4;
+        }
+    }
+}
