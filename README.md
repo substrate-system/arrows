@@ -95,6 +95,13 @@ import '@substrate-system/arrows/css/min'
 
 ## Use
 
+This depends on the `visually-hidden` CSS class. Import
+[@substrate-system/a11y](https://github.com/substrate-system/a11y) for this:
+
+```js
+import '@substrate-system/a11y/visually-hidden'
+```
+
 ### JS
 ```js
 import { SubstrateBack, SubstrateNext } from '@substrate-system/arrows'
@@ -110,7 +117,7 @@ document.body.innerHTML += `
 
 ### CSS
 
-Disabled status is handled correctly, but the `:disabled` attribute in CSS
+Disabled status is handled correctly in JS, but the `:disabled` attribute in CSS
 doesn't work on custom elements. So target the nested `button` element.
 
 ```css
