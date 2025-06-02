@@ -1,7 +1,5 @@
 import { WebComponent } from '@substrate-system/web-component'
 import { back, next } from './svg.js'
-import Debug from '@substrate-system/debug'
-const debug = Debug()
 
 // for docuement.querySelector
 declare global {
