@@ -49,7 +49,7 @@
     "@substrate-system/debug": "^0.9.0",
     "@substrate-system/dom": "^0.1.7",
     "@substrate-system/tapzero": "^0.10.15",
-    "@substrate-system/web-component": "^0.0.16",
+    "@substrate-system/web-component": "^0.0.17",
     "@typescript-eslint/eslint-plugin": "^8.7.0",
     "@typescript-eslint/parser": "^8.7.0",
     "auto-changelog": "^2.4.0",
