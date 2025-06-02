@@ -6,5 +6,10 @@ substrate-back, substrate-next {
     & button {
         background-color: transparent;
         border: none;
+
+        & svg {
+            width: 4rem;
+            height: 4rem;
+        }
     }
 }
