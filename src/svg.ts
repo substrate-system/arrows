@@ -1,6 +1,6 @@
 export const back = `
 <?xml version="1.0" ?>
-<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="-20 -20 552 552" xmlns="http://www.w3.org/2000/svg">
 <defs>
 <style>.cls-1{fill:none;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:20px;}</style>
 </defs>
@@ -14,7 +14,7 @@ export const back = `
 `
 
 export const next = `<?xml version="1.0" ?>
-<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="-20 -20 552 552" xmlns="http://www.w3.org/2000/svg">
 <defs>
 <style>.cls-1{fill:none;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:20px;}</style>
 </defs>
