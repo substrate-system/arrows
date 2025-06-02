@@ -14,6 +14,9 @@ document.body.innerHTML += `
     <substrate-next></substrate-next>
 `
 
+console.log('import.meta', import.meta.env.DEV)
+console.log('import.meta', import.meta.env.MODE)
+
 const next = qs('substrate-next')
 next?.addEventListener('click', () => {
     debug('click next')
