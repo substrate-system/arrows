@@ -16,6 +16,19 @@ Next and previous icons as web components.
 
 <!-- toc -->
 
+- [Install](#install)
+- [Modules](#modules)
+  * [ESM](#esm)
+  * [Common JS](#common-js)
+  * [pre-built](#pre-built)
+- [CSS](#css)
+  * [Import CSS](#import-css)
+- [Use](#use)
+  * [JS](#js)
+  * [CSS](#css-1)
+
+<!-- tocstop -->
+
 ## Install
 
 ```sh
