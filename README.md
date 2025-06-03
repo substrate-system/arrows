@@ -13,20 +13,9 @@ Next and previous icons as web components.
 
 [See a live demo](https://substrate-system.github.io/arrows/)
 
+<details><summary><h2>Contents</h2></summary>
 <!-- toc -->
-
-- [Install](#install)
-- [Modules](#modules)
-  * [ESM](#esm)
-  * [Common JS](#common-js)
-  * [pre-built](#pre-built)
-- [CSS](#css)
-  * [Import CSS](#import-css)
-- [Use](#use)
-  * [JS](#js)
-  * [CSS](#css-1)
-
-<!-- tocstop -->
+</details>
 
 ## Install
 
