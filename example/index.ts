@@ -21,14 +21,33 @@ document.body.innerHTML += `
     <substrate-next></substrate-next>
 
     <h2>Links</h2>
-    <anchor-back href="fooo"></anchor-back>
-    <anchor-next href="barrr"></anchor-next>
+    <anchor-back id="linkback" href="fooo"></anchor-back>
+    <anchor-next id="linknext" href="barrr"></anchor-next>
 
 
     <h2>Controls</h2>
     <button id="disable">Disable them</button>
     <button id="enable">Enable them</button>
+
+    <button id="linkdisable">Disable the links</button>
+    <button id="linkenable">Enable the links</button>
 `
+
+qs('anchor-back')?.addEventListener('click', ev => {
+    ev.preventDefault()
+    debug('link!!!!!!!!!!!', ev.currentTarget.getAttribute('href'))
+})
+
+qs('#linkdisable')?.addEventListener('click', () => {
+    debug('dsiable the links...')
+    const links = [qs('#linkback'), qs('#linknext')]
+    links.forEach(link => {
+        link?.setAttribute('disabled', '')
+    })
+})
+qs('#linkenable')?.addEventListener('click', () => {
+    debug('enabled the links...')
+})
 
 qs('#disable')?.addEventListener('click', ev => {
     ev.preventDefault()

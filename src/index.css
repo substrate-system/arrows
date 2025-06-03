@@ -20,9 +20,17 @@ anchor-next, anchor-back {
     height: fit-content;
 
     & a {
+        display: inline-block;
+
         & svg {
             width: 4rem;
             height: 4rem;
+        }
+    }
+
+    &.disabled {
+        & a {
+            opacity: 0.4;
         }
     }
 }
