@@ -13,3 +13,16 @@ substrate-back, substrate-next {
         }
     }
 }
+
+anchor-next, anchor-back {
+    display: inline-block;
+    width: fit-content;
+    height: fit-content;
+
+    & a {
+        & svg {
+            width: 4rem;
+            height: 4rem;
+        }
+    }
+}

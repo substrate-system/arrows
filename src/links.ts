@@ -33,24 +33,26 @@ class SubstrateLink extends WebComponent.create('substrate-input') {
     }
 }
 
-export class SubstrateNext extends SubstrateLink {
-    static NAME = 'next-anchor'
+export class AnchorNext extends SubstrateLink {
+    static NAME = 'anchor-next'
 
     render () {
-        this.innerHTML = `<button>
+        const h = this.getAttribute('href')
+        this.innerHTML = `<a${h ? ' href=' + h : ''}>
             ${next}
             <span class="visually-hidden">Next</span>
-        </button>`
+        </a$>`
     }
 }
 
-export class SubstrateBack extends SubstrateLink {
-    static NAME = 'back-anchor'
+export class AnchorBack extends SubstrateLink {
+    static NAME = 'anchor-back'
 
     render () {
-        this.innerHTML = `<button${this.disabled ? ' disabled' : ''}>
+        const h = this.getAttribute('href')
+        this.innerHTML = `<a${h ? ' href=' + h : ''}>
             ${back}
             <span class="visually-hidden">Back</span>
-        </button$>`
+        </a$>`
     }
 }

@@ -1,6 +1,10 @@
 import { qs } from '@substrate-system/web-component'
 import { SubstrateBack, SubstrateNext } from '../src/index.js'
 import '@substrate-system/a11y/visually-hidden'
+import {
+    AnchorBack,
+    AnchorNext
+} from '../src/links.js'
 import '../src/index.css'
 import './index.css'
 import Debug from '@substrate-system/debug'
@@ -8,11 +12,18 @@ const debug = Debug(import.meta.env.DEV)
 
 SubstrateBack.define()
 SubstrateNext.define()
+AnchorBack.define()
+AnchorNext.define()
 
 document.body.innerHTML += `
     <h2>Buttons</h2>
     <substrate-back></substrate-back>
     <substrate-next></substrate-next>
+
+    <h2>Links</h2>
+    <anchor-back href="fooo"></anchor-back>
+    <anchor-next href="barrr"></anchor-next>
+
 
     <h2>Controls</h2>
     <button id="disable">Disable them</button>
