@@ -152,6 +152,10 @@ document.body.innerHTML += `
 
 Render an `a` element, not a button.
 
+Setting `.disabled = true`, or setting the `disabled` attribute, on an anchor
+button will remove the `href` attribute from the internal link tag, effectively
+disabling it.
+
 ```js
 import {
     AnchorBack,
