@@ -1,10 +1,18 @@
 import { WebComponent } from '@substrate-system/web-component'
 import { back, next } from './svg.js'
-import Debug from '@substrate-system/debug'
-const debug = Debug()
+// import Debug from '@substrate-system/debug'
+// const debug = Debug()
+
+// for docuement.querySelector
+declare global {
+    interface HTMLElementTagNameMap {
+        'anchor-back': AnchorBack
+        'anchor-next': AnchorNext
+    }
+}
 
 class SubstrateLink extends WebComponent.create('substrate-input') {
-    static observedAttributes = ['disabled']
+    static observedAttributes = ['disabled', 'href']
 
     get disabled ():boolean {
         return !!(this.qs('a')?.hasAttribute('href'))
@@ -17,19 +25,27 @@ class SubstrateLink extends WebComponent.create('substrate-input') {
             setTimeout(() => {
                 const a = this.qs('a')
                 a?.removeAttribute('href')
-                debug('disabling it.......', a)
+                // debug('disabling it.......', a)
             }, 0)
         } else {
             // enable
             const h = this.getAttribute('href')
             if (!h) throw new Error('not href')
             this.classList.remove('disabled')
+            if (this.hasAttribute('disabled')) this.removeAttribute('disabled')
             setTimeout(() => {
                 const a = this.qs('a')
                 a?.setAttribute('href', h)
-                debug('un-disabling it.......', a)
+                // debug('un-disabling it.......', a)
             }, 0)
         }
+    }
+
+    hanldeChange_href (_, newValue:string) {
+        if (!newValue) {
+            this.qs('a')?.removeAttribute('href')
+        }
+        this.qs('a')?.setAttribute('href', newValue)
     }
 
     handleChange_disabled (_oldValue:string, newValue:string) {

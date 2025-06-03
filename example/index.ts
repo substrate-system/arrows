@@ -33,11 +33,6 @@ document.body.innerHTML += `
     <button id="linkenable">Enable the links</button>
 `
 
-qs('anchor-back')?.addEventListener('click', ev => {
-    ev.preventDefault()
-    debug('link!!!!!!!!!!!', ev.currentTarget.getAttribute('href'))
-})
-
 qs('#linkdisable')?.addEventListener('click', () => {
     debug('dsiable the links...')
     const links = [qs('#linkback'), qs('#linknext')]
@@ -46,7 +41,9 @@ qs('#linkdisable')?.addEventListener('click', () => {
     })
 })
 qs('#linkenable')?.addEventListener('click', () => {
-    debug('enabled the links...')
+    debug('enabling the links...');
+    (qs('#linknext') as AnchorNext).disabled = false;
+    (qs('#linkback') as AnchorBack).disabled = false
 })
 
 qs('#disable')?.addEventListener('click', ev => {
