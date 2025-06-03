@@ -25,7 +25,6 @@ class SubstrateLink extends WebComponent.create('substrate-input') {
             setTimeout(() => {
                 const a = this.qs('a')
                 a?.removeAttribute('href')
-                // debug('disabling it.......', a)
             }, 0)
         } else {
             // enable
@@ -36,7 +35,6 @@ class SubstrateLink extends WebComponent.create('substrate-input') {
             setTimeout(() => {
                 const a = this.qs('a')
                 a?.setAttribute('href', h)
-                // debug('un-disabling it.......', a)
             }, 0)
         }
     }
