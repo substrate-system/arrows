@@ -9,8 +9,32 @@ declare global {
     }
 }
 
-export class SubstrateNext extends WebComponent.create('substrate-next') {
+class SubstrateInput extends WebComponent.create('substrate-input') {
     static observedAttributes = ['disabled']
+
+    connectedCallback () {
+        this.render()
+    }
+
+    addEventListener<K extends keyof HTMLElementEventMap> (
+        type:K,
+        listener:(this:HTMLElement, ev:HTMLElementEventMap[K])=>any,
+        options?:boolean|AddEventListenerOptions
+    ):void {
+        return this.qs('button')?.addEventListener(type, listener, options)
+    }
+
+    removeEventListener<K extends keyof HTMLElementEventMap> (
+        type:K,
+        listener:(this:HTMLElement, ev:HTMLElementEventMap[K])=>any,
+        options?:boolean|AddEventListenerOptions
+    ):void {
+        return this.qs('button')?.removeEventListener(type, listener, options)
+    }
+}
+
+export class SubstrateNext extends SubstrateInput {
+    static NAME = 'substrate-next'
 
     connectedCallback () {
         this.render()
@@ -40,8 +64,8 @@ export class SubstrateNext extends WebComponent.create('substrate-next') {
     }
 }
 
-export class SubstrateBack extends WebComponent.create('substrate-back') {
-    static observedAttributes = ['disabled']
+export class SubstrateBack extends SubstrateInput {
+    static NAME = 'substrate-back'
 
     /**
      * Handle 'disabled' attribute changes
