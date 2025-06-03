@@ -5,11 +5,11 @@ import { back, next } from './svg.js'
 declare global {
     interface HTMLElementTagNameMap {
         'substrate-back': SubstrateBack
-        'substreate-next': SubstrateNext
+        'substrate-next': SubstrateNext
     }
 }
 
-class SubstrateInput extends WebComponent.create('substrate-input') {
+export class SubstrateInput extends WebComponent.create('substrate-input') {
     static observedAttributes = ['disabled']
 
     get disabled ():boolean {
@@ -28,6 +28,19 @@ class SubstrateInput extends WebComponent.create('substrate-input') {
             if (!this.hasAttribute('disabled')) return
             this.removeAttribute('disabled')
             btn?.removeAttribute('disabled')
+        }
+    }
+
+    /**
+     * Handle 'disabled' attribute changes
+     * @see {@link https://gomakethings.com/how-to-detect-when-attributes-change-on-a-web-component/#organizing-your-code Go Make Things article}
+     */
+    handleChange_disabled (_oldValue:string, newValue:string) {
+        if (newValue === null) {
+            // was removed
+            this.disabled = false
+        } else {
+            this.disabled = true
         }
     }
 
@@ -56,7 +69,7 @@ export class SubstrateNext extends SubstrateInput {
     static NAME = 'substrate-next'
 
     render () {
-        this.innerHTML = `<button>
+        this.innerHTML = `<button${this.disabled ? ' disabled' : ''}>
             ${next}
             <span class="visually-hidden">Next</span>
         </button>`
@@ -70,7 +83,7 @@ export class SubstrateBack extends SubstrateInput {
         this.innerHTML = `<button${this.disabled ? ' disabled' : ''}>
             ${back}
             <span class="visually-hidden">Back</span>
-        </button$>`
+        </button>`
     }
 }
 

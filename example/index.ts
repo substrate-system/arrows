@@ -10,18 +10,42 @@ SubstrateBack.define()
 SubstrateNext.define()
 
 document.body.innerHTML += `
+    <h2>Buttons</h2>
     <substrate-back></substrate-back>
     <substrate-next></substrate-next>
+
+    <h2>Controls</h2>
+    <button id="disable">Disable them</button>
+    <button id="enable">Enable them</button>
 `
 
-const next = qs('substrate-next')
-next?.addEventListener('click', () => {
-    debug('click next')
+qs('#disable')?.addEventListener('click', ev => {
+    ev.preventDefault()
+    debug('disable them')
+    qs('substrate-back')!.disabled = true
+    qs('substrate-next')!.disabled = true
 })
 
-qs('substrate-back')?.addEventListener('click', () => {
-    debug('click back...')
+qs('#enable')?.addEventListener('click', ev => {
+    ev.preventDefault()
+    debug('enable them')
+    qs('substrate-back')!.disabled = false
+    qs('substrate-next')!.disabled = false
+    setTimeout(() => {
+        addListeners()
+    }, 0)
 })
+
+function addListeners () {
+    const next = qs('substrate-next')
+    next?.addEventListener('click', () => {
+        debug('click next')
+    })
+
+    qs('substrate-back')?.addEventListener('click', () => {
+        debug('click back...')
+    })
+}
 
 // @ts-expect-error dev
 window.TEST = {
@@ -32,3 +56,5 @@ window.TEST = {
         qs('substrate-back')!.disabled = true
     }
 }
+
+addListeners()
