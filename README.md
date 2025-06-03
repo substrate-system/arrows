@@ -9,7 +9,7 @@
 [![license](https://img.shields.io/badge/License-Big_Time-blue?style=flat-square)](LICENSE)
 
 
-Next and previous icons as web components.
+Next and previous icons as [accessible web components](https://www.sarasoueidan.com/blog/accessible-icon-buttons/).
 
 [See a live demo](https://substrate-system.github.io/arrows/)
 
