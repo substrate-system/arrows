@@ -25,8 +25,9 @@ Next and previous icons as web components.
 - [CSS](#css)
   * [Import CSS](#import-css)
 - [Use](#use)
-  * [JS](#js)
   * [CSS](#css-1)
+  * [Buttons](#buttons)
+  * [Links](#links)
 
 <!-- tocstop -->
 
