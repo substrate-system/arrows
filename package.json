@@ -14,6 +14,7 @@
     "build-css": "postcss src/index.css --use postcss-nesting > dist/index.css",
     "build-css:min": "postcss src/index.css --use cssnano postcss-nesting > dist/index.min.css",
     "build-cjs": "esbuild src/*.ts --format=cjs --keep-names --tsconfig=tsconfig.build.json --outdir=./dist --out-extension:.js=.cjs --sourcemap",
+    "build-cjs:min": "esbuild ./src/*.ts --format=cjs --keep-names --bundle --tsconfig=tsconfig.build.json --minify --out-extension:.js=.min.cjs --outdir=./dist --sourcemap",
     "build-esm": "esbuild src/*.ts --format=esm --metafile=dist/meta.json --keep-names --tsconfig=tsconfig.build.json --outdir=./dist --sourcemap && tsc --emitDeclarationOnly --project tsconfig.build.json --outDir dist",
     "build-esm:min": "esbuild ./src/*.ts --format=esm --keep-names --bundle --tsconfig=tsconfig.build.json --minify --out-extension:.js=.min.js --outdir=./dist --sourcemap",
     "build-example": "mkdir -p ./public && rm -rf ./public/* && NODE_ENV=development vite --mode development --base=\"/arrows\" build",
@@ -30,6 +31,14 @@
     ".": {
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
+    },
+    "./min": "./dist/index.min.js",
+    "./links": {
+      "import": "./dist/links.js",
+      "require": "./dist/links.cjs"
+    },
+    "./min/links": {
+      "import": "./dist/links.min.js"
     },
     "./css": "./dist/index.css",
     "./css/min": "./dist/index.min.css",

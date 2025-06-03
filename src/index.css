@@ -27,10 +27,4 @@ anchor-next, anchor-back {
             height: 4rem;
         }
     }
-
-    &.disabled {
-        & a {
-            opacity: 0.4;
-        }
-    }
 }

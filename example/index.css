@@ -6,9 +6,6 @@ button {
     }
 }
 
-anchor-next, anchor-back {
-}
-
 substrate-next, substrate-back {
     /*
         disabled attribute doesn't work on the custom element
@@ -19,6 +16,14 @@ substrate-next, substrate-back {
 
     & button {
         &:disabled {
+            opacity: 0.4;
+        }
+    }
+}
+
+anchor-next, anchor-back {
+    &.disabled {
+        & a {
             opacity: 0.4;
         }
     }

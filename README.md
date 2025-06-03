@@ -105,19 +105,6 @@ This depends on the `visually-hidden` CSS class. Import
 import '@substrate-system/a11y/visually-hidden'
 ```
 
-### JS
-```js
-import { SubstrateBack, SubstrateNext } from '@substrate-system/arrows'
-
-SubstrateBack.define()
-SubstrateNext.define()
-
-document.body.innerHTML += `
-    <substrate-back></substrate-back>
-    <substrate-next></substrate-next>
-`
-```
-
 ### CSS
 
 Disabled status is handled correctly in JS, but the `:disabled` attribute in CSS
@@ -135,4 +122,46 @@ substrate-next, substrate-back {
         }
     }
 }
+
+/* anchors */
+anchor-next, anchor-back {
+    &.disabled {
+        & a {
+            opacity: 0.4;
+        }
+    }
+}
+```
+
+### Buttons
+
+```js
+import { SubstrateBack, SubstrateNext } from '@substrate-system/arrows'
+
+SubstrateBack.define()
+SubstrateNext.define()
+
+document.body.innerHTML += `
+    <substrate-back></substrate-back>
+    <substrate-next></substrate-next>
+`
+```
+
+### Links
+
+Render an `a` element, not a button.
+
+```js
+import {
+    AnchorBack,
+    AnchorNext
+} from '@substrate-system/arrows/links'
+
+AnchorBack.define()
+AnchorNext.define()
+
+document.body.innerHTML += `
+  <anchor-back class="test" href="/back"></anchor-back>
+  <anchor-next class="test" href="/next"></anchor-next>
+`
 ```
