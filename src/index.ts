@@ -20,7 +20,7 @@ export class SubstrateInput extends WebComponent.create('substrate-input') {
         const btn = this.qs('button')
         if (value) {
             // disable
-            btn?.setAttribute('disabled', '' + true)
+            btn?.setAttribute('disabled', '')
             if (this.hasAttribute('disabled')) return
             this.setAttribute('disabled', '')
         } else {
@@ -45,7 +45,9 @@ export class SubstrateInput extends WebComponent.create('substrate-input') {
     }
 
     connectedCallback () {
-        this.render()
+        if (!this.innerHTML) {
+            this.render()
+        }
     }
 
     addEventListener<K extends keyof HTMLElementEventMap> (
@@ -68,22 +70,30 @@ export class SubstrateInput extends WebComponent.create('substrate-input') {
 export class SubstrateNext extends SubstrateInput {
     static NAME = 'substrate-next'
 
-    render () {
-        this.innerHTML = `<button${this.disabled ? ' disabled' : ''}>
+    static html ({ disabled }:{ disabled:boolean }):string {
+        return `<button${disabled ? ' disabled' : ''}>
             ${next}
             <span class="visually-hidden">Next</span>
         </button>`
+    }
+
+    render () {
+        this.innerHTML = SubstrateNext.html({ disabled: this.disabled })
     }
 }
 
 export class SubstrateBack extends SubstrateInput {
     static NAME = 'substrate-back'
 
-    render () {
-        this.innerHTML = `<button${this.disabled ? ' disabled' : ''}>
+    static html ({ disabled }:{ disabled:boolean }):string {
+        return `<button${disabled ? ' disabled' : ''}>
             ${back}
             <span class="visually-hidden">Back</span>
         </button>`
+    }
+
+    render () {
+        this.innerHTML = SubstrateBack.html({ disabled: this.disabled })
     }
 }
 

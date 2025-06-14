@@ -39,6 +39,12 @@ class SubstrateLink extends WebComponent.create('substrate-input') {
         }
     }
 
+    connectedCallback () {
+        if (!this.innerHTML) {
+            this.render()
+        }
+    }
+
     hanldeChange_href (_, newValue:string) {
         if (!newValue) {
             this.qs('a')?.removeAttribute('href')
@@ -59,23 +65,31 @@ class SubstrateLink extends WebComponent.create('substrate-input') {
 export class AnchorNext extends SubstrateLink {
     static NAME = 'anchor-next'
 
-    render () {
-        const h = this.getAttribute('href')
-        this.innerHTML = `<a${h ? ' href=' + h : ''}>
+    static html ({ href }:{ href?:string|null }):string {
+        return `<a${href ? ' href=' + href : ''}>
             ${next}
             <span class="visually-hidden">Next</span>
         </a$>`
+    }
+
+    render () {
+        const h = this.getAttribute('href')
+        this.innerHTML = AnchorNext.html({ href: h })
     }
 }
 
 export class AnchorBack extends SubstrateLink {
     static NAME = 'anchor-back'
 
-    render () {
-        const h = this.getAttribute('href')
-        this.innerHTML = `<a${h ? ' href=' + h : ''}>
+    static html ({ href }:{ href?:string|null }):string {
+        return `<a${href ? ' href=' + href : ''}>
             ${back}
             <span class="visually-hidden">Back</span>
         </a$>`
+    }
+
+    render () {
+        const h = this.getAttribute('href')
+        this.innerHTML = AnchorBack.html({ href: h })
     }
 }
