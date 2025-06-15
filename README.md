@@ -25,6 +25,8 @@ Next and previous icons as [accessible web components](https://www.sarasoueidan.
 - [CSS](#css)
   * [Import CSS](#import-css)
 - [Use](#use)
+  * [server side](#server-side)
+  * [client side](#client-side)
   * [CSS](#css-1)
   * [Buttons](#buttons)
   * [Links](#links)
