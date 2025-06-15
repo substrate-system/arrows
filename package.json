@@ -9,7 +9,8 @@
   "scripts": {
     "lint": "eslint \"./**/*.{ts,js}\"",
     "build-tests": "esbuild test/index.ts --target=es2020 --bundle --keep-names > test/test-bundle.js",
-    "test": "npm run build && npm run build-tests && npm run test-tape-run",
+    "test": "npm run build && npm run build-tests && npm run test-tape-run && npm run test-serverside",
+    "test-serverside": "esbuild ./test/server-side.ts --bundle --platform=node | node | tap-spec",
     "test-tape-run": "cat test/index.html | tape-run --input=html --static=test | tap-spec",
     "build-css": "postcss src/index.css --use postcss-nesting > dist/index.css",
     "build-css:min": "postcss src/index.css --use cssnano postcss-nesting > dist/index.min.css",
@@ -54,7 +55,7 @@
     }
   },
   "dependencies": {
-    "@substrate-system/web-component": "^0.0.22"
+    "@substrate-system/web-component": "^0.0.24"
   },
   "devDependencies": {
     "@substrate-system/a11y": "^0.0.12",

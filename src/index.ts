@@ -1,5 +1,5 @@
 import { WebComponent } from '@substrate-system/web-component'
-import { back, next } from './svg.js'
+import * as ssr from './ssr.js'
 
 // for docuement.querySelector
 declare global {
@@ -13,7 +13,7 @@ export class SubstrateInput extends WebComponent.create('substrate-input') {
     static observedAttributes = ['disabled']
 
     get disabled ():boolean {
-        return !!(this.qs('button')?.hasAttribute('disabled'))
+        return !!(this.hasAttribute('disabled'))
     }
 
     set disabled (value:boolean) {
@@ -26,8 +26,9 @@ export class SubstrateInput extends WebComponent.create('substrate-input') {
         } else {
             // enable
             if (!this.hasAttribute('disabled')) return
-            this.removeAttribute('disabled')
             btn?.removeAttribute('disabled')
+            if (!this.hasAttribute('disabled')) return
+            this.removeAttribute('disabled')
         }
     }
 
@@ -49,32 +50,13 @@ export class SubstrateInput extends WebComponent.create('substrate-input') {
             this.render()
         }
     }
-
-    addEventListener<K extends keyof HTMLElementEventMap> (
-        type:K,
-        listener:(this:HTMLElement, ev:HTMLElementEventMap[K])=>any,
-        options?:boolean|AddEventListenerOptions
-    ):void {
-        return this.qs('button')?.addEventListener(type, listener, options)
-    }
-
-    removeEventListener<K extends keyof HTMLElementEventMap> (
-        type:K,
-        listener:(this:HTMLElement, ev:HTMLElementEventMap[K])=>any,
-        options?:boolean|AddEventListenerOptions
-    ):void {
-        return this.qs('button')?.removeEventListener(type, listener, options)
-    }
 }
 
 export class SubstrateNext extends SubstrateInput {
     static NAME = 'substrate-next'
 
     static html ({ disabled }:{ disabled:boolean }):string {
-        return `<button${disabled ? ' disabled' : ''}>
-            ${next}
-            <span class="visually-hidden">Next</span>
-        </button>`
+        return ssr.SubstrateNext.html({ disabled })
     }
 
     render () {
@@ -86,10 +68,7 @@ export class SubstrateBack extends SubstrateInput {
     static NAME = 'substrate-back'
 
     static html ({ disabled }:{ disabled:boolean }):string {
-        return `<button${disabled ? ' disabled' : ''}>
-            ${back}
-            <span class="visually-hidden">Back</span>
-        </button>`
+        return ssr.SubstrateBack.html({ disabled })
     }
 
     render () {
@@ -97,7 +76,5 @@ export class SubstrateBack extends SubstrateInput {
     }
 }
 
-if ('customElements' in window) {
-    SubstrateBack.define()
-    SubstrateNext.define()
-}
+SubstrateBack.define()
+SubstrateNext.define()

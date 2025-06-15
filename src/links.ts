@@ -1,7 +1,5 @@
 import { WebComponent } from '@substrate-system/web-component'
-import { back, next } from './svg.js'
-// import Debug from '@substrate-system/debug'
-// const debug = Debug()
+import * as ssr from './ssr.js'
 
 // for docuement.querySelector
 declare global {
@@ -11,11 +9,11 @@ declare global {
     }
 }
 
-class SubstrateLink extends WebComponent.create('substrate-input') {
+export class SubstrateLink extends WebComponent.create('substrate-input') {
     static observedAttributes = ['disabled', 'href']
 
     get disabled ():boolean {
-        return !!(this.qs('a')?.hasAttribute('href'))
+        return !!(this.hasAttribute('href'))
     }
 
     set disabled (value:boolean) {
@@ -66,10 +64,7 @@ export class AnchorNext extends SubstrateLink {
     static NAME = 'anchor-next'
 
     static html ({ href }:{ href?:string|null }):string {
-        return `<a${href ? ' href=' + href : ''}>
-            ${next}
-            <span class="visually-hidden">Next</span>
-        </a$>`
+        return ssr.AnchorNext.html({ href })
     }
 
     render () {
@@ -82,10 +77,7 @@ export class AnchorBack extends SubstrateLink {
     static NAME = 'anchor-back'
 
     static html ({ href }:{ href?:string|null }):string {
-        return `<a${href ? ' href=' + href : ''}>
-            ${back}
-            <span class="visually-hidden">Back</span>
-        </a$>`
+        return ssr.AnchorBack.html({ href })
     }
 
     render () {

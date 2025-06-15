@@ -1,4 +1,4 @@
-import { qs } from '@substrate-system/web-component'
+import { qs } from '@substrate-system/web-component/qs'
 import { SubstrateBack, SubstrateNext } from '../src/index.js'
 import '@substrate-system/a11y/visually-hidden'
 import {
