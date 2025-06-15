@@ -33,10 +33,14 @@
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     },
-    "./min": "./dist/index.min.js",
     "./links": {
       "import": "./dist/links.js",
       "require": "./dist/links.cjs"
+    },
+    "./min": "./dist/index.min.js",
+    "./ssr": {
+      "import": "./dist/ssr.js",
+      "require": "./dist/ssr.cjs"
     },
     "./min/links": {
       "import": "./dist/links.min.js"

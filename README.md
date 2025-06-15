@@ -99,14 +99,61 @@ import '@substrate-system/arrows/css/min'
 
 ## Use
 
+### server side
+
+This is implemented as an [HTML web component](https://adactio.com/journal/20618),
+which means it can be easily rendered to a string, then made interactive on the
+client side.
+
+Import the `/ssr` path in node, and use the `.html` function:
+
+```js
+import {
+    AnchorBack,
+    AnchorNext,
+    SubstrateBack,
+    SubstrateNext
+} from '@substrate-system/arrows/ssr'
+
+const backLink = AnchorBack.html({ href: '/abc' })
+
+const nextButton = SubstrateNext.html({ disabled: false })
+```
+
+
+### client side
+
+If the component has been rendered on the server, then you just need to add
+interactivity on the client side.
+
+Import from the `/browser` path to include a "light" version of the component,
+that will not render anything; it will just attach event listeners.
+
+```js
+import { SubstrateBack, SubstrateNext } from '@substrate-system/browser'
+```
+
+#### Full client side
+
+For when you want to render on the client, and also "hydrate" client-side.
+
+Import the root path to include a web component that will both render itself,
+and also attach event listeners. This cannot be used in node, because it depends
+on browser APIs.
+
+```js
+import { SubstrateBack, SubstrateNext } from '@substrate-system/arrows'
+import { AnchorBack, AnchorNext } from '@substrate-system/arrows/links'
+```
+
+### CSS
+
 This depends on the `visually-hidden` CSS class. Import
 [@substrate-system/a11y](https://github.com/substrate-system/a11y) for this:
 
 ```js
 import '@substrate-system/a11y/visually-hidden'
 ```
-
-### CSS
 
 Disabled status is handled correctly in JS, but the `:disabled` attribute in CSS
 doesn't work on custom elements. So target the nested `button` element.
