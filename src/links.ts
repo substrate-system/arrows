@@ -43,10 +43,11 @@ export class SubstrateLink extends WebComponent.create('substrate-input') {
         }
     }
 
-    hanldeChange_href (_, newValue:string) {
+    handleChange_href (_, newValue:string) {
         if (!newValue) {
             this.qs('a')?.removeAttribute('href')
         }
+
         this.qs('a')?.setAttribute('href', newValue)
     }
 
