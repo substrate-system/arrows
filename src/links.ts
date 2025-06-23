@@ -62,7 +62,7 @@ export class SubstrateLink extends WebComponent.create('substrate-input') {
 }
 
 export class AnchorNext extends SubstrateLink {
-    static NAME = 'anchor-next'
+    static NAME = ssr.AnchorNext.NAME
 
     static html ({ href }:{ href?:string|null }):string {
         return ssr.AnchorNext.html({ href })
@@ -75,7 +75,7 @@ export class AnchorNext extends SubstrateLink {
 }
 
 export class AnchorBack extends SubstrateLink {
-    static NAME = 'anchor-back'
+    static NAME = ssr.AnchorBack.NAME
 
     static html ({ href }:{ href?:string|null }):string {
         return ssr.AnchorBack.html({ href })

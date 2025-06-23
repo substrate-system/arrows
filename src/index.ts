@@ -53,7 +53,7 @@ export class SubstrateInput extends WebComponent.create('substrate-input') {
 }
 
 export class SubstrateNext extends SubstrateInput {
-    static NAME = 'substrate-next'
+    static NAME = ssr.SubstrateNext.NAME
 
     static html ({ disabled }:{ disabled:boolean }):string {
         return ssr.SubstrateNext.html({ disabled })
@@ -65,7 +65,7 @@ export class SubstrateNext extends SubstrateInput {
 }
 
 export class SubstrateBack extends SubstrateInput {
-    static NAME = 'substrate-back'
+    static NAME = ssr.SubstrateBack.NAME
 
     static html ({ disabled }:{ disabled:boolean }):string {
         return ssr.SubstrateBack.html({ disabled })
