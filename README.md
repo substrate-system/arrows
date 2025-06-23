@@ -132,7 +132,7 @@ Import from the `/browser` path to include a "light" version of the component,
 that will not render anything; it will just attach event listeners.
 
 ```js
-import { SubstrateBack, SubstrateNext } from '@substrate-system/browser'
+import { SubstrateBack, SubstrateNext } from '@substrate-system/arrows/browser'
 ```
 
 #### Full client side
