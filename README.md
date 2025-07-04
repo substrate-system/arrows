@@ -128,11 +128,11 @@ const nextButton = SubstrateNext.html({ disabled: false })
 If the component has been rendered on the server, then you just need to add
 interactivity on the client side.
 
-Import from the `/browser` path to include a "light" version of the component,
+Import from the `/client` path to include a "light" version of the component,
 that will not render anything; it will just attach event listeners.
 
 ```js
-import { SubstrateBack, SubstrateNext } from '@substrate-system/arrows/browser'
+import { SubstrateBack, SubstrateNext } from '@substrate-system/arrows/client'
 ```
 
 #### Full client side
