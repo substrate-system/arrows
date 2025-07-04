@@ -107,7 +107,7 @@ This is implemented as an [HTML web component](https://adactio.com/journal/20618
 which means it can be easily rendered to a string, then made interactive on the
 client side.
 
-Import the `/ssr` path in node, and use the `.html` function:
+Import the `/html` path in node, and use the `.html` function:
 
 ```js
 import {
@@ -115,7 +115,7 @@ import {
     AnchorNext,
     SubstrateBack,
     SubstrateNext
-} from '@substrate-system/arrows/ssr'
+} from '@substrate-system/arrows/html'
 
 const backLink = AnchorBack.html({ href: '/abc' })
 

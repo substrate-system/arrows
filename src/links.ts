@@ -1,5 +1,5 @@
 import { WebComponent } from '@substrate-system/web-component'
-import * as ssr from './ssr.js'
+import * as ssr from './html.js'
 
 // for docuement.querySelector
 declare global {

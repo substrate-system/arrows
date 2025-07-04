@@ -4,7 +4,7 @@ import {
     AnchorNext,
     SubstrateBack,
     SubstrateNext
-} from '../src/ssr.js'
+} from '../src/html.js'
 
 const buttons = [SubstrateBack, SubstrateNext]
 const links = [AnchorBack, AnchorNext]
