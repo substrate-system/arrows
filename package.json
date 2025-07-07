@@ -63,7 +63,7 @@
     }
   },
   "dependencies": {
-    "@substrate-system/web-component": "^0.0.24"
+    "@substrate-system/web-component": "^0.0.28"
   },
   "devDependencies": {
     "@substrate-system/a11y": "^0.0.12",
@@ -87,7 +87,7 @@
     "tape-run": "^11.0.0",
     "typedoc": "^0.28.1",
     "typescript": "^5.8.3",
-    "vite": "^6.3.5"
+    "vite": "^7.0.2"
   },
   "author": "nichoth <nichoth@nichoth.com> (https://nichoth.com)",
   "license": "SEE LICENSE IN LICENSE"
