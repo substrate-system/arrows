@@ -1,4 +1,3 @@
-import { WebComponent } from '@substrate-system/web-component'
 import * as ssr from './html.js'
 
 // for docuement.querySelector
@@ -9,8 +8,27 @@ declare global {
     }
 }
 
-export class SubstrateInput extends WebComponent.create('substrate-input') {
+export class SubstrateInput extends HTMLElement {
     static observedAttributes = ['disabled']
+    static TAG: string
+
+    static define () {
+        if (!customElements.get(this.TAG)) {
+            customElements.define(this.TAG, this as any)
+        }
+    }
+
+    connectedCallback () {
+        if (!this.innerHTML) {
+            this.render()
+        }
+    }
+
+    qs<K extends keyof HTMLElementTagNameMap>(selector: K): HTMLElementTagNameMap[K] | null
+    qs<E extends Element = Element>(selector: string): E | null
+    qs (selector: string): Element | null {
+        return this.querySelector(selector)
+    }
 
     get disabled ():boolean {
         return !!(this.hasAttribute('disabled'))
@@ -45,15 +63,13 @@ export class SubstrateInput extends WebComponent.create('substrate-input') {
         }
     }
 
-    connectedCallback () {
-        if (!this.innerHTML) {
-            this.render()
-        }
+    render () {
+        throw new Error('Should be implemented by children')
     }
 }
 
 export class SubstrateNext extends SubstrateInput {
-    static NAME = ssr.SubstrateNext.NAME
+    static TAG = 'substrate-next'
 
     static html ({ disabled }:{ disabled:boolean }):string {
         return ssr.SubstrateNext.html({ disabled })
@@ -65,7 +81,7 @@ export class SubstrateNext extends SubstrateInput {
 }
 
 export class SubstrateBack extends SubstrateInput {
-    static NAME = ssr.SubstrateBack.NAME
+    static TAG = 'substrate-back'
 
     static html ({ disabled }:{ disabled:boolean }):string {
         return ssr.SubstrateBack.html({ disabled })

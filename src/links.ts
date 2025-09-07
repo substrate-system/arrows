@@ -1,4 +1,3 @@
-import { WebComponent } from '@substrate-system/web-component'
 import * as ssr from './html.js'
 
 // for docuement.querySelector
@@ -9,11 +8,28 @@ declare global {
     }
 }
 
-export class SubstrateLink extends WebComponent.create('substrate-input') {
+export class SubstrateLink extends HTMLElement {
     static observedAttributes = ['disabled', 'href']
+    static TAG: string
+
+    static define () {
+        if (!customElements.get(this.TAG)) {
+            customElements.define(this.TAG, this as any)
+        }
+    }
+
+    connectedCallback () {
+        this.render()
+    }
+
+    qs<K extends keyof HTMLElementTagNameMap>(selector: K): HTMLElementTagNameMap[K] | null
+    qs<E extends Element = Element>(selector: string): E | null
+    qs (selector: string): Element | null {
+        return this.querySelector(selector)
+    }
 
     get disabled ():boolean {
-        return !!(this.hasAttribute('href'))
+        return !!(this.hasAttribute('disabled'))
     }
 
     set disabled (value:boolean) {
@@ -37,12 +53,6 @@ export class SubstrateLink extends WebComponent.create('substrate-input') {
         }
     }
 
-    connectedCallback () {
-        if (!this.innerHTML) {
-            this.render()
-        }
-    }
-
     handleChange_href (_, newValue:string) {
         if (!newValue) {
             this.qs('a')?.removeAttribute('href')
@@ -59,10 +69,14 @@ export class SubstrateLink extends WebComponent.create('substrate-input') {
             this.disabled = true
         }
     }
+
+    render () {
+        throw new Error('Should be implemented by children')
+    }
 }
 
 export class AnchorNext extends SubstrateLink {
-    static NAME = ssr.AnchorNext.NAME
+    static TAG = 'anchor-next'
 
     static html ({ href }:{ href?:string|null }):string {
         return ssr.AnchorNext.html({ href })
@@ -70,12 +84,13 @@ export class AnchorNext extends SubstrateLink {
 
     render () {
         const h = this.getAttribute('href')
-        this.innerHTML = AnchorNext.html({ href: h })
+        const html = AnchorNext.html({ href: h })
+        this.innerHTML = html
     }
 }
 
 export class AnchorBack extends SubstrateLink {
-    static NAME = ssr.AnchorBack.NAME
+    static TAG = 'anchor-back'
 
     static html ({ href }:{ href?:string|null }):string {
         return ssr.AnchorBack.html({ href })
@@ -83,6 +98,7 @@ export class AnchorBack extends SubstrateLink {
 
     render () {
         const h = this.getAttribute('href')
-        this.innerHTML = AnchorBack.html({ href: h })
+        const html = AnchorBack.html({ href: h })
+        this.innerHTML = html
     }
 }

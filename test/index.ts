@@ -3,10 +3,29 @@ import { waitFor } from '@substrate-system/dom'
 import { SubstrateBack, SubstrateNext } from '../src/index.js'
 import { AnchorBack, AnchorNext } from '../src/links.js'
 
-SubstrateBack.define()
-SubstrateNext.define()
-AnchorBack.define()
-AnchorNext.define()
+try {
+    SubstrateBack.define()
+} catch (error) {
+    console.error('SubstrateBack.define() failed:', error)
+}
+
+try {
+    SubstrateNext.define()
+} catch (error) {
+    console.error('SubstrateNext.define() failed:', error)
+}
+
+try {
+    AnchorBack.define()
+} catch (error) {
+    console.error('AnchorBack.define() failed:', error)
+}
+
+try {
+    AnchorNext.define()
+} catch (error) {
+    console.error('AnchorNext.define() failed:', error)
+}
 
 test('Disabled getter & setter', async t => {
     document.body.innerHTML += `
@@ -36,7 +55,8 @@ test('anchor elements', async t => {
         <anchor-next class="test" href="/next"></anchor-next>
     `
 
-    t.ok(await waitFor('anchor-back a'), 'should find an anchor element')
+    t.ok(await waitFor('anchor-back a', { timeout: 3000 }),
+        'should find an anchor element')
     t.ok(await waitFor('anchor-next a'), 'should find an anchor element')
 })
 
@@ -56,4 +76,9 @@ test('disable the links', async t => {
     el.disabled = false
     t.equal((await waitFor('anchor-back a'))?.getAttribute('href'), '/back',
         'should go back to the previous href when it is enabled')
+})
+
+test('all done', () => {
+    // @ts-expect-error testing
+    window.testsFinished = true
 })
