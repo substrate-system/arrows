@@ -3,8 +3,8 @@ import * as ssr from './html.js'
 // for docuement.querySelector
 declare global {
     interface HTMLElementTagNameMap {
-        'substrate-back': SubstrateBack
-        'substrate-next': SubstrateNext
+        'substrate-back':SubstrateBack
+        'substrate-next':SubstrateNext
     }
 }
 
@@ -24,9 +24,12 @@ export class SubstrateInput extends HTMLElement {
         }
     }
 
-    qs<K extends keyof HTMLElementTagNameMap>(selector: K): HTMLElementTagNameMap[K] | null
-    qs<E extends Element = Element>(selector: string): E | null
-    qs (selector: string): Element | null {
+    qs<K extends keyof HTMLElementTagNameMap>(
+        selector:K
+    ):HTMLElementTagNameMap[K]|null
+
+    qs<E extends Element = Element>(selector:string):E|null
+    qs (selector:string):Element|null {
         return this.querySelector(selector)
     }
 
@@ -76,7 +79,9 @@ export class SubstrateNext extends SubstrateInput {
     }
 
     render () {
-        this.innerHTML = SubstrateNext.html({ disabled: this.disabled })
+        if (!this.innerHTML) {
+            this.innerHTML = SubstrateNext.html({ disabled: this.disabled })
+        }
     }
 }
 
@@ -88,7 +93,9 @@ export class SubstrateBack extends SubstrateInput {
     }
 
     render () {
-        this.innerHTML = SubstrateBack.html({ disabled: this.disabled })
+        if (!this.innerHTML) {
+            this.innerHTML = SubstrateBack.html({ disabled: this.disabled })
+        }
     }
 }
 
