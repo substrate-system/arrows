@@ -8,7 +8,7 @@ import { SubstrateLink } from './links.js'
  */
 
 export class AnchorNext extends SubstrateLink {
-    static NAME = 'anchor-next'
+    static TAG = 'anchor-next'
 
     render () {
         // noop
@@ -16,7 +16,7 @@ export class AnchorNext extends SubstrateLink {
 }
 
 export class AnchorBack extends SubstrateLink {
-    static NAME = 'anchor-back'
+    static TAG = 'anchor-back'
 
     render () {
         // noop
@@ -24,7 +24,7 @@ export class AnchorBack extends SubstrateLink {
 }
 
 export class SubstrateBack extends SubstrateInput {
-    static NAME = 'substrate-back'
+    static TAG = 'substrate-back'
 
     render () {
         // noop
@@ -32,7 +32,7 @@ export class SubstrateBack extends SubstrateInput {
 }
 
 export class SubstrateNext extends SubstrateInput {
-    static NAME = 'substrate-next'
+    static TAG = 'substrate-next'
 
     render () {
         // noop

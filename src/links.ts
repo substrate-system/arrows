@@ -10,11 +10,11 @@ declare global {
 
 export class SubstrateLink extends HTMLElement {
     static observedAttributes = ['disabled', 'href']
-    static TAG: string
+    static TAG:string
 
     static define () {
         if (!customElements.get(this.TAG)) {
-            customElements.define(this.TAG, this as any)
+            customElements.define(this.TAG, this)
         }
     }
 
@@ -22,9 +22,9 @@ export class SubstrateLink extends HTMLElement {
         this.render()
     }
 
-    qs<K extends keyof HTMLElementTagNameMap>(selector: K): HTMLElementTagNameMap[K] | null
-    qs<E extends Element = Element>(selector: string): E | null
-    qs (selector: string): Element | null {
+    qs<K extends keyof HTMLElementTagNameMap>(selector: K):HTMLElementTagNameMap[K] | null
+    qs<E extends Element = Element>(selector: string):E|null
+    qs (selector:string):Element|null {
         return this.querySelector(selector)
     }
 

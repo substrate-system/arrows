@@ -2,6 +2,10 @@ import { test } from '@substrate-system/tapzero'
 import { waitFor } from '@substrate-system/dom'
 import { SubstrateBack, SubstrateNext } from '../src/index.js'
 import { AnchorBack, AnchorNext } from '../src/links.js'
+import {
+    AnchorBack as AnchorBackClient,
+    AnchorNext as AnchorNextClient
+} from '../src/client.js'
 
 try {
     SubstrateBack.define()
@@ -76,6 +80,12 @@ test('disable the links', async t => {
     el.disabled = false
     t.equal((await waitFor('anchor-back a'))?.getAttribute('href'), '/back',
         'should go back to the previous href when it is enabled')
+})
+
+test('define client-side anchor back and anchor next', t => {
+    AnchorBackClient.define()
+    AnchorNextClient.define()
+    t.ok(true, "didn't throw")
 })
 
 test('all done', () => {
