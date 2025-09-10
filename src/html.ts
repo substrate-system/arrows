@@ -5,7 +5,7 @@ export const SubstrateBack = {
     html ({ disabled }:{ disabled:boolean }):string {
         return `<button${disabled ? ' disabled' : ''}>
             ${back}
-            <span class="visually-hidden">Next</span>
+            <span class="visually-hidden">Back</span>
         </button>`
     }
 }
