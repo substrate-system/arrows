@@ -83,26 +83,39 @@ test('should accept multiple attributes (new API)', async t => {
         'should include aria-label')
 
     // Test anchor elements with multiple attributes
-    const backLink = AnchorBack.html({
+    const anchorAttrs = {
         href: '/previous',
         target: '_blank',
         class: 'nav-link',
         rel: 'noopener'
-    })
+    }
+    const backLink = AnchorBack.html(anchorAttrs)
     t.ok(backLink.includes('href="/previous"'), 'should include href')
     t.ok(backLink.includes('target="_blank"'), 'should include target')
     t.ok(backLink.includes('class="nav-link"'), 'should include class')
     t.ok(backLink.includes('rel="noopener"'), 'should include rel')
 
-    const nextLink = AnchorNext.html({
+    const backOuter = AnchorBack.outerHTML(anchorAttrs)
+    t.ok(backOuter.includes('target="_blank"'), 'should include target on <a>')
+    t.ok(backOuter.includes('class="nav-link"'), 'should include class on <a>')
+    t.ok(backOuter.includes('rel="noopener"'), 'should include rel on <a>')
+
+    const nextAttrs = {
         href: '/next-page',
         download: 'file.pdf',
         'data-analytics': 'next-click'
-    })
+    }
+    const nextLink = AnchorNext.html(nextAttrs)
     t.ok(nextLink.includes('href="/next-page"'), 'should include href')
     t.ok(nextLink.includes('download="file.pdf"'), 'should include download')
     t.ok(nextLink.includes('data-analytics="next-click"'),
         'should include data analytics')
+
+    const nextOuter = AnchorNext.outerHTML(nextAttrs)
+    t.ok(nextOuter.includes('download="file.pdf"'),
+        'should include download on <a>')
+    t.ok(nextOuter.includes('data-analytics="next-click"'),
+        'should include data analytics on <a>')
 })
 
 test('outerHTML should accept attributes on custom elements', async t => {
@@ -112,9 +125,9 @@ test('outerHTML should accept attributes on custom elements', async t => {
         'data-component': 'back-button',
         id: 'back-wrapper'
     })
-    t.ok(backButton.includes('<substrate-back class="wrapper-class"') ||
+    t.ok((backButton.includes('<substrate-back class="wrapper-class"') ||
          backButton.includes('<substrate-back data-component="back-button"') ||
-         backButton.includes('<substrate-back id="back-wrapper"'),
+         backButton.includes('<substrate-back id="back-wrapper"')),
     'should include attributes on custom element')
 
     const nextLink = AnchorNext.outerHTML({

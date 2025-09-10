@@ -44,8 +44,15 @@ export const AnchorBack = {
         </anchor-back>`
     },
     html (attrs:Record<string, any> = {}):string {
-        const attrStr = toAttributes(attrs)
-        return `<a${attrStr ? ' ' + attrStr : ''}>
+        // Only pass valid <a> attributes
+        const validAttrs = ['href', 'target', 'rel', 'download', 'class', 'id', 'aria-label', 'data-analytics']
+        const anchorAttrs: Record<string, any> = {}
+        for (const key of validAttrs) {
+            if (attrs[key] !== undefined) anchorAttrs[key] = attrs[key]
+        }
+        const attrStr = Object.entries(anchorAttrs)
+            .map(([k, v]) => ` ${k}="${v}"`).join('')
+        return `<a${attrStr}>
             ${back}
             <span class="visually-hidden">Back</span>
         </a>`
@@ -61,8 +68,15 @@ export const AnchorNext = {
         </anchor-next>`
     },
     html (attrs:Record<string, any> = {}):string {
-        const attrStr = toAttributes(attrs)
-        return `<a${attrStr ? ' ' + attrStr : ''}>
+        // Only pass valid <a> attributes
+        const validAttrs = ['href', 'target', 'rel', 'download', 'class', 'id', 'aria-label', 'data-analytics']
+        const anchorAttrs: Record<string, any> = {}
+        for (const key of validAttrs) {
+            if (attrs[key] !== undefined) anchorAttrs[key] = attrs[key]
+        }
+        const attrStr = Object.entries(anchorAttrs)
+            .map(([k, v]) => ` ${k}="${v}"`).join('')
+        return `<a${attrStr}>
             ${next}
             <span class="visually-hidden">Next</span>
         </a>`
