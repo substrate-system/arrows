@@ -11,24 +11,28 @@ try {
     SubstrateBack.define()
 } catch (error) {
     console.error('SubstrateBack.define() failed:', error)
+    throw error
 }
 
 try {
     SubstrateNext.define()
 } catch (error) {
     console.error('SubstrateNext.define() failed:', error)
+    throw error
 }
 
 try {
     AnchorBack.define()
 } catch (error) {
     console.error('AnchorBack.define() failed:', error)
+    throw error
 }
 
 try {
     AnchorNext.define()
 } catch (error) {
     console.error('AnchorNext.define() failed:', error)
+    throw error
 }
 
 test('Disabled getter & setter', async t => {
@@ -61,12 +65,13 @@ test('anchor elements', async t => {
     `
 
     t.ok(await waitFor('anchor-back a', { timeout: 3000 }),
-        'should find an anchor element')
-    t.ok(await waitFor('anchor-next a'), 'should find an anchor element')
+        'should find an anchor back element')
+    t.ok(await waitFor('anchor-next a'), 'should find an anchor next element')
 })
 
 test('anchor href', async t => {
     const el = await waitFor('anchor-back a')
+    console.log('all atttrrr', el?.getAttributeNames().join(' '))
     t.equal(el?.getAttribute('href'), '/back', 'should start with href')
 })
 

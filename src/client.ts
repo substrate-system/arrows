@@ -10,8 +10,10 @@ import { SubstrateLink } from './links.js'
 // for docuement.querySelector
 declare global {
     interface HTMLElementTagNameMap {
-        'substrate-back':SubstrateBack
-        'substrate-next':SubstrateNext
+        'substrate-back':SubstrateBack;
+        'substrate-next':SubstrateNext;
+        'anchor-next':AnchorNext;
+        'anchor-back':AnchorBack;
     }
 }
 

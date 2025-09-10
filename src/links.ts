@@ -3,14 +3,22 @@ import * as ssr from './html.js'
 // for docuement.querySelector
 declare global {
     interface HTMLElementTagNameMap {
-        'anchor-back': AnchorBack
-        'anchor-next': AnchorNext
+        'anchor-back':AnchorBack
+        'anchor-next':AnchorNext
     }
 }
 
 export class SubstrateLink extends HTMLElement {
     static observedAttributes = ['disabled', 'href']
     static TAG:string
+    href:string
+
+    constructor () {
+        super()
+        const href = this.getAttribute('href')
+        if (!href) throw new Error('not href')
+        this.href = href
+    }
 
     static define () {
         if (!customElements.get(this.TAG)) {
@@ -22,12 +30,32 @@ export class SubstrateLink extends HTMLElement {
         this.render()
     }
 
-    qs<K extends keyof HTMLElementTagNameMap>(
-        selector: K
-    ):HTMLElementTagNameMap[K] | null
+    attributeChangedCallback (name:string, _oldValue:string, newValue:string) {
+        if (name === 'href') {
+            if (!newValue) {
+                this.qs('a')?.removeAttribute('href')
+            } else {
+                this.href = newValue
+                this.qs('a')?.setAttribute('href', newValue)
+            }
 
-    qs<E extends Element = Element>(selector: string):E|null
-    qs (selector:string):Element|null {
+            this.href = newValue
+        }
+
+        if (name === 'disabled') {
+            if (newValue !== null) {
+                // is disabled
+                this.qs('a')?.removeAttribute('href')
+            } else {
+                // not disabled
+                this.qs('a')?.setAttribute('href', this.href)
+            }
+        }
+    }
+
+    qs<K extends keyof HTMLElementTagNameMap> (
+        selector: K
+    ):HTMLElementTagNameMap[K]|null {
         return this.querySelector(selector)
     }
 
@@ -100,8 +128,8 @@ export class AnchorBack extends SubstrateLink {
     }
 
     render () {
-        const h = this.getAttribute('href')
-        const html = AnchorBack.html({ href: h })
+        const href = this.getAttribute('href')
+        const html = AnchorBack.html({ href })
         this.innerHTML = html
     }
 }
