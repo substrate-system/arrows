@@ -1,14 +1,17 @@
+import { toAttributes } from '@substrate-system/web-component/attributes'
 import { back, next } from './svg.js'
 
 export const SubstrateBack = {
     TAG: 'substrate-back',
-    outerHTML ({ disabled }:{ disabled:boolean }):string {
-        return `<substrate-back>
-            ${this.html({ disabled })}
+    outerHTML (attrs:Record<string, any> = {}):string {
+        const attrStr = toAttributes(attrs)
+        return `<substrate-back${attrStr ? ' ' + attrStr : ''}>
+            ${this.html(attrs)}
         </substrate-back>`
     },
-    html ({ disabled }:{ disabled:boolean }):string {
-        return `<button${disabled ? ' disabled' : ''}>
+    html (attrs:Record<string, any> = {}):string {
+        const attrStr = toAttributes(attrs)
+        return `<button${attrStr ? ' ' + attrStr : ''}>
             ${back}
             <span class="visually-hidden">Back</span>
         </button>`
@@ -17,13 +20,15 @@ export const SubstrateBack = {
 
 export const SubstrateNext = {
     TAG: 'substrate-next',
-    outerHTML ({ disabled }:{ disabled:boolean }):string {
-        return `<substrate-next>
-            ${this.html({ disabled })}
+    outerHTML (attrs:Record<string, any> = {}):string {
+        const attrStr = toAttributes(attrs)
+        return `<substrate-next${attrStr ? ' ' + attrStr : ''}>
+            ${this.html(attrs)}
         </substrate-next>`
     },
-    html ({ disabled }:{ disabled:boolean }):string {
-        return `<button${disabled ? ' disabled' : ''}>
+    html (attrs:Record<string, any> = {}):string {
+        const attrStr = toAttributes(attrs)
+        return `<button${attrStr ? ' ' + attrStr : ''}>
             ${next}
             <span class="visually-hidden">Next</span>
         </button>`
@@ -32,13 +37,15 @@ export const SubstrateNext = {
 
 export const AnchorBack = {
     TAG: 'anchor-back',
-    outerHTML ({ href }:{ href?:string }):string {
-        return `<anchor-back>
-            ${this.html({ href })}
+    outerHTML (attrs:Record<string, any> = {}):string {
+        const attrStr = toAttributes(attrs)
+        return `<anchor-back${attrStr ? ' ' + attrStr : ''}>
+            ${this.html(attrs)}
         </anchor-back>`
     },
-    html ({ href }:{ href?:string|null }):string {
-        return `<a${href ? ' href="' + href + '"' : ''}>
+    html (attrs:Record<string, any> = {}):string {
+        const attrStr = toAttributes(attrs)
+        return `<a${attrStr ? ' ' + attrStr : ''}>
             ${back}
             <span class="visually-hidden">Back</span>
         </a>`
@@ -47,13 +54,15 @@ export const AnchorBack = {
 
 export const AnchorNext = {
     TAG: 'anchor-next',
-    outerHTML ({ href }:{ href?:string }):string {
-        return `<anchor-next>
-            ${this.html({ href })}
+    outerHTML (attrs:Record<string, any> = {}):string {
+        const attrStr = toAttributes(attrs)
+        return `<anchor-next${attrStr ? ' ' + attrStr : ''}>
+            ${this.html(attrs)}
         </anchor-next>`
     },
-    html ({ href }:{ href?:string|null }):string {
-        return `<a${href ? ' href="' + href + '"' : ''}>
+    html (attrs:Record<string, any> = {}):string {
+        const attrStr = toAttributes(attrs)
+        return `<a${attrStr ? ' ' + attrStr : ''}>
             ${next}
             <span class="visually-hidden">Next</span>
         </a>`

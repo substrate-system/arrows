@@ -74,8 +74,8 @@ export class SubstrateInput extends HTMLElement {
 export class SubstrateNext extends SubstrateInput {
     static TAG = 'substrate-next'
 
-    static html ({ disabled }:{ disabled:boolean }):string {
-        return ssr.SubstrateNext.html({ disabled })
+    static html (attrs:Record<string, any> = {}):string {
+        return ssr.SubstrateNext.html(attrs)
     }
 
     render () {
@@ -88,8 +88,8 @@ export class SubstrateNext extends SubstrateInput {
 export class SubstrateBack extends SubstrateInput {
     static TAG = 'substrate-back'
 
-    static html ({ disabled }:{ disabled:boolean }):string {
-        return ssr.SubstrateBack.html({ disabled })
+    static html (attrs:Record<string, any> = {}):string {
+        return ssr.SubstrateBack.html(attrs)
     }
 
     render () {

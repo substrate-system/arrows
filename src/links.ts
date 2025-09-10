@@ -81,8 +81,8 @@ export class SubstrateLink extends HTMLElement {
 export class AnchorNext extends SubstrateLink {
     static TAG = 'anchor-next'
 
-    static html ({ href }:{ href?:string|null }):string {
-        return ssr.AnchorNext.html({ href })
+    static html (attrs:Record<string, any> = {}):string {
+        return ssr.AnchorNext.html(attrs)
     }
 
     render () {
@@ -95,8 +95,8 @@ export class AnchorNext extends SubstrateLink {
 export class AnchorBack extends SubstrateLink {
     static TAG = 'anchor-back'
 
-    static html ({ href }:{ href?:string|null }):string {
-        return ssr.AnchorBack.html({ href })
+    static html (attrs:Record<string, any> = {}):string {
+        return ssr.AnchorBack.html(attrs)
     }
 
     render () {

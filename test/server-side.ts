@@ -35,7 +35,8 @@ test('TAG property should return correct tag names', async t => {
 
 test('outerHTML should render complete elements', async t => {
     const backButton = SubstrateBack.outerHTML({ disabled: true })
-    t.ok(backButton.includes('<substrate-back>'), 'should include opening tag')
+    t.ok(backButton.includes('<substrate-back disabled>'),
+        'should include opening tag')
     t.ok(backButton.includes('</substrate-back>'), 'should include closing tag')
     t.ok(backButton.includes('disabled'), 'should include disabled prop')
 
@@ -46,12 +47,100 @@ test('outerHTML should render complete elements', async t => {
         'should not include disabled when false')
 
     const backLink = AnchorBack.outerHTML({ href: '/back' })
-    t.ok(backLink.includes('<anchor-back>'), 'should include opening tag')
+    t.ok(backLink.includes('<anchor-back href="/back">'),
+        'should include opening tag')
     t.ok(backLink.includes('</anchor-back>'), 'should include closing tag')
     t.ok(backLink.includes('href="/back"'), 'should include href')
 
     const nextLink = AnchorNext.outerHTML({ href: '/next' })
-    t.ok(nextLink.includes('<anchor-next>'), 'should include opening tag')
+    t.ok(nextLink.includes('<anchor-next href="/next">'),
+        'should include opening tag')
     t.ok(nextLink.includes('</anchor-next>'), 'should include closing tag')
     t.ok(nextLink.includes('href="/next"'), 'should include href')
+})
+
+test('should accept multiple attributes (new API)', async t => {
+    // Test button elements with multiple attributes
+    const backButton = SubstrateBack.html({
+        disabled: true,
+        class: 'my-button',
+        'data-test': 'back-btn',
+        id: 'back-id'
+    })
+    t.ok(backButton.includes('disabled'), 'should include disabled')
+    t.ok(backButton.includes('class="my-button"'), 'should include class')
+    t.ok(backButton.includes('data-test="back-btn"'), 'should include data attr')
+    t.ok(backButton.includes('id="back-id"'), 'should include id')
+
+    const nextButton = SubstrateNext.html({
+        type: 'submit',
+        class: 'submit-btn',
+        'aria-label': 'Next page'
+    })
+    t.ok(nextButton.includes('type="submit"'), 'should include type')
+    t.ok(nextButton.includes('class="submit-btn"'), 'should include class')
+    t.ok(nextButton.includes('aria-label="Next page"'),
+        'should include aria-label')
+
+    // Test anchor elements with multiple attributes
+    const backLink = AnchorBack.html({
+        href: '/previous',
+        target: '_blank',
+        class: 'nav-link',
+        rel: 'noopener'
+    })
+    t.ok(backLink.includes('href="/previous"'), 'should include href')
+    t.ok(backLink.includes('target="_blank"'), 'should include target')
+    t.ok(backLink.includes('class="nav-link"'), 'should include class')
+    t.ok(backLink.includes('rel="noopener"'), 'should include rel')
+
+    const nextLink = AnchorNext.html({
+        href: '/next-page',
+        download: 'file.pdf',
+        'data-analytics': 'next-click'
+    })
+    t.ok(nextLink.includes('href="/next-page"'), 'should include href')
+    t.ok(nextLink.includes('download="file.pdf"'), 'should include download')
+    t.ok(nextLink.includes('data-analytics="next-click"'),
+        'should include data analytics')
+})
+
+test('outerHTML should accept attributes on custom elements', async t => {
+    // Test that attributes are applied to the custom elements themselves
+    const backButton = SubstrateBack.outerHTML({
+        class: 'wrapper-class',
+        'data-component': 'back-button',
+        id: 'back-wrapper'
+    })
+    t.ok(backButton.includes('<substrate-back class="wrapper-class"') ||
+         backButton.includes('<substrate-back data-component="back-button"') ||
+         backButton.includes('<substrate-back id="back-wrapper"'),
+    'should include attributes on custom element')
+
+    const nextLink = AnchorNext.outerHTML({
+        slot: 'navigation',
+        'data-testid': 'next-anchor'
+    })
+    t.ok(nextLink.includes('slot="navigation"') ||
+         nextLink.includes('data-testid="next-anchor"'),
+    'should include attributes on anchor-next element')
+})
+
+test('should work with no attributes (backward compatibility)', async t => {
+    // Test that the new API still works when no attributes are provided
+    const backButton = SubstrateBack.html()
+    t.ok(backButton.includes('<button>'), 'should render button without attrs')
+    t.ok(backButton.includes('visually-hidden'), 'should include hidden text')
+
+    const nextLink = AnchorNext.html()
+    t.ok(nextLink.includes('<a>'), 'should render anchor without attrs')
+    t.ok(nextLink.includes('visually-hidden'), 'should include hidden text')
+
+    const backOuter = SubstrateBack.outerHTML()
+    t.ok(backOuter.includes('<substrate-back>'),
+        'should render custom element without attrs')
+
+    const nextOuter = AnchorNext.outerHTML()
+    t.ok(nextOuter.includes('<anchor-next>'),
+        'should render custom element without attrs')
 })

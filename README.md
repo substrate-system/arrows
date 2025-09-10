@@ -123,8 +123,24 @@ import {
     SubstrateNext
 } from '@substrate-system/arrows/html'
 
+// Basic usage
 const backLink = AnchorBack.html({ href: '/abc' })
-const nextButton = SubstrateNext.html({ disabled: false })
+const nextButton = SubstrateNext.html({ disabled: true })
+
+// multiple attributes
+const styledButton = SubstrateBack.html({
+    disabled: false,
+    class: 'primary-btn',
+    'data-testid': 'back-button',
+    id: 'main-back'
+})
+
+const externalLink = AnchorNext.html({
+    href: 'https://example.com',
+    target: '_blank',
+    rel: 'noopener noreferrer',
+    class: 'external-link'
+})
 ```
 
 Each component also provides:
@@ -133,19 +149,35 @@ Each component also provides:
   wrapper tags
 
 ```js
+import {
+    SubstrateBack,
+    SubstrateNext
+} from '@substrate-system/arrows/html'
+
 // Get the tag name
 console.log(SubstrateBack.TAG) // 'substrate-back'
 
-// Render complete element with wrapper
+// Render complete element with wrapper (basic)
 const completeButton = SubstrateBack.outerHTML({ disabled: false })
 // Returns: <substrate-back><button>...</button></substrate-back>
 
 const completeLink = AnchorNext.outerHTML({ href: '/next' })
 // Returns: <anchor-next><a href="/next">...</a></anchor-next>
+
+// Render with attributes on both wrapper and inner elements
+const styledWrapper = SubstrateBack.outerHTML({
+    class: 'button-wrapper',
+    'data-component': 'navigation',
+    disabled: true,
+    id: 'back-btn'
+})
+// Returns: <substrate-back class="button-wrapper" data-component="navigation">
+//            <button disabled id="back-btn">...</button>
+//          </substrate-back>
 ```
 
 
-### client side
+### Client-Side
 
 If the component has been rendered on the server, then you just need to add
 interactivity on the client side.
