@@ -27,7 +27,7 @@ Next and previous icons as
   * [Import CSS](#import-css)
 - [Use](#use)
   * [server side](#server-side)
-  * [client side](#client-side)
+  * [Client-Side](#client-side)
   * [CSS](#css-1)
   * [Buttons](#buttons)
   * [Links](#links)
