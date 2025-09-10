@@ -112,8 +112,8 @@ This is implemented as an
 which means it can be easily rendered to a string, then made interactive on the
 client side.
 
-Import the `/html` path in node, and use the `.html` function for inner 
-HTML content:
+Import the `/html` path in node, and use the `.html` or `.outerHTML` function
+for HTML content:
 
 ```js
 import {
@@ -149,35 +149,33 @@ Each component also provides:
   wrapper tags
 
 ```js
-import {
-    SubstrateBack,
-    SubstrateNext
-} from '@substrate-system/arrows/html'
-
 // Get the tag name
 console.log(SubstrateBack.TAG) // 'substrate-back'
 
 // Render complete element with wrapper (basic)
-const completeButton = SubstrateBack.outerHTML({ disabled: false })
-// Returns: <substrate-back><button>...</button></substrate-back>
+const completeButton = SubstrateBack.outerHTML({ disabled: true })
+// Returns: <substrate-back disabled>
+//            <button disabled>...</button>
+//          </substrate-back>
 
 const completeLink = AnchorNext.outerHTML({ href: '/next' })
-// Returns: <anchor-next><a href="/next">...</a></anchor-next>
+// Returns: <anchor-next href="/next">
+//            <a href="/next">...</a>
+//          </anchor-next>
 
-// Render with attributes on both wrapper and inner elements
-const styledWrapper = SubstrateBack.outerHTML({
-    class: 'button-wrapper',
-    'data-component': 'navigation',
+// Attributes are applied to both the custom element wrapper AND inner element
+const styledButton = SubstrateBack.outerHTML({
+    class: 'styled-btn',
     disabled: true,
-    id: 'back-btn'
+    'data-testid': 'back-button'
 })
-// Returns: <substrate-back class="button-wrapper" data-component="navigation">
-//            <button disabled id="back-btn">...</button>
+// Returns: <substrate-back class="styled-btn" disabled data-testid="back-button">
+//            <button class="styled-btn" disabled data-testid="back-button">...</button>
 //          </substrate-back>
 ```
 
 
-### Client-Side
+### client side
 
 If the component has been rendered on the server, then you just need to add
 interactivity on the client side.
