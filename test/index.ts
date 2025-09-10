@@ -39,7 +39,8 @@ test('Disabled getter & setter', async t => {
 
     const el = await waitFor('substrate-back') as SubstrateBack
     t.ok(el, 'should find an element')
-    t.ok(await waitFor('substrate-back button'), 'should render the component')
+    t.ok(await waitFor('substrate-back button'),
+        'should render the component')
 
     el!.disabled = true
 
@@ -75,10 +76,12 @@ test('disable the links', async t => {
     el.disabled = true
 
     const a = await waitFor('anchor-back a')
-    t.ok(!a?.hasAttribute('href'), 'should remove the href when it is disabled')
+    t.ok(!a?.hasAttribute('href'),
+        'should remove the href when it is disabled')
 
     el.disabled = false
-    t.equal((await waitFor('anchor-back a'))?.getAttribute('href'), '/back',
+    t.equal((await waitFor('anchor-back a'))?.getAttribute('href'),
+        '/back',
         'should go back to the previous href when it is enabled')
 })
 

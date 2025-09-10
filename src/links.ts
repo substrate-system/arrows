@@ -22,7 +22,10 @@ export class SubstrateLink extends HTMLElement {
         this.render()
     }
 
-    qs<K extends keyof HTMLElementTagNameMap>(selector: K):HTMLElementTagNameMap[K] | null
+    qs<K extends keyof HTMLElementTagNameMap>(
+        selector: K
+    ):HTMLElementTagNameMap[K] | null
+
     qs<E extends Element = Element>(selector: string):E|null
     qs (selector:string):Element|null {
         return this.querySelector(selector)

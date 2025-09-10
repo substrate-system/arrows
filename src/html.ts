@@ -1,7 +1,12 @@
 import { back, next } from './svg.js'
 
 export const SubstrateBack = {
-    NAME: 'substrate-back',
+    TAG: 'substrate-back',
+    outerHTML ({ disabled }:{ disabled:boolean }):string {
+        return `<substrate-back>
+            ${this.html({ disabled })}
+        </substrate-back>`
+    },
     html ({ disabled }:{ disabled:boolean }):string {
         return `<button${disabled ? ' disabled' : ''}>
             ${back}
@@ -11,7 +16,12 @@ export const SubstrateBack = {
 }
 
 export const SubstrateNext = {
-    NAME: 'substrate-next',
+    TAG: 'substrate-next',
+    outerHTML ({ disabled }:{ disabled:boolean }):string {
+        return `<substrate-next>
+            ${this.html({ disabled })}
+        </substrate-next>`
+    },
     html ({ disabled }:{ disabled:boolean }):string {
         return `<button${disabled ? ' disabled' : ''}>
             ${next}
@@ -21,7 +31,12 @@ export const SubstrateNext = {
 }
 
 export const AnchorBack = {
-    NAME: 'anchor-back',
+    TAG: 'anchor-back',
+    outerHTML ({ href }:{ href?:string }):string {
+        return `<anchor-back>
+            ${this.html({ href })}
+        </anchor-back>`
+    },
     html ({ href }:{ href?:string|null }):string {
         return `<a${href ? ' href="' + href + '"' : ''}>
             ${back}
@@ -31,7 +46,12 @@ export const AnchorBack = {
 }
 
 export const AnchorNext = {
-    NAME: 'anchor-next',
+    TAG: 'anchor-next',
+    outerHTML ({ href }:{ href?:string }):string {
+        return `<anchor-next>
+            ${this.html({ href })}
+        </anchor-next>`
+    },
     html ({ href }:{ href?:string|null }):string {
         return `<a${href ? ' href="' + href + '"' : ''}>
             ${next}

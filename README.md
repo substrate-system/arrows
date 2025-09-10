@@ -9,7 +9,8 @@
 [![license](https://img.shields.io/badge/License-Big_Time-blue?style=flat-square)](LICENSE)
 
 
-Next and previous icons as [accessible web components](https://www.sarasoueidan.com/blog/accessible-icon-buttons/).
+Next and previous icons as 
+[accessible web components](https://www.sarasoueidan.com/blog/accessible-icon-buttons/).
 
 [See a live demo](https://substrate-system.github.io/arrows/)
 
@@ -45,7 +46,8 @@ npm i -S @substrate-system/arrows
 
 ## Modules
 
-This exposes ESM and common JS via [package.json `exports` field](https://nodejs.org/api/packages.html#exports).
+This exposes ESM and common JS via 
+[package.json `exports` field](https://nodejs.org/api/packages.html#exports).
 
 ### ESM
 ```js
@@ -63,8 +65,10 @@ that is accessible to your web server, then link to them in HTML.
 
 #### copy
 ```sh
-cp ./node_modules/@substrate-system/arrows/dist/index.min.js ./public/substrate-arrows.min.js
-cp ./node_modules/@substrate-system/arrows/dist/style.min.css ./public/substrate-arrows.css
+cp ./node_modules/@substrate-system/arrows/dist/index.min.js \
+    ./public/substrate-arrows.min.js
+cp ./node_modules/@substrate-system/arrows/dist/style.min.css \
+    ./public/substrate-arrows.css
 ```
 
 #### HTML
@@ -103,11 +107,13 @@ import '@substrate-system/arrows/css/min'
 
 ### server side
 
-This is implemented as an [HTML web component](https://adactio.com/journal/20618),
+This is implemented as an 
+[HTML web component](https://adactio.com/journal/20618),
 which means it can be easily rendered to a string, then made interactive on the
 client side.
 
-Import the `/html` path in node, and use the `.html` function:
+Import the `/html` path in node, and use the `.html` function for inner 
+HTML content:
 
 ```js
 import {
@@ -118,8 +124,24 @@ import {
 } from '@substrate-system/arrows/html'
 
 const backLink = AnchorBack.html({ href: '/abc' })
-
 const nextButton = SubstrateNext.html({ disabled: false })
+```
+
+Each component also provides:
+- `.TAG` property with the custom element tag name
+- `.outerHTML()` function to render the complete custom element with 
+  wrapper tags
+
+```js
+// Get the tag name
+console.log(SubstrateBack.TAG) // 'substrate-back'
+
+// Render complete element with wrapper
+const completeButton = SubstrateBack.outerHTML({ disabled: false })
+// Returns: <substrate-back><button>...</button></substrate-back>
+
+const completeLink = AnchorNext.outerHTML({ href: '/next' })
+// Returns: <anchor-next><a href="/next">...</a></anchor-next>
 ```
 
 
