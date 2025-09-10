@@ -45,10 +45,11 @@ export const AnchorBack = {
     },
     html (attrs:Record<string, any> = {}):string {
         // Only pass valid <a> attributes
-        const validAttrs = ['href', 'target', 'rel', 'download', 'class', 'id', 'aria-label', 'data-analytics']
-        const anchorAttrs: Record<string, any> = {}
+        const validAttrs = ['href', 'target', 'rel', 'download', 'class', 'id',
+            'aria-label', 'data-analytics']
+        const anchorAttrs:Record<string, string> = {}
         for (const key of validAttrs) {
-            if (attrs[key] !== undefined) anchorAttrs[key] = attrs[key]
+            if (attrs[key]) anchorAttrs[key] = attrs[key]
         }
         const attrStr = Object.entries(anchorAttrs)
             .map(([k, v]) => ` ${k}="${v}"`).join('')
@@ -72,7 +73,7 @@ export const AnchorNext = {
         const validAttrs = ['href', 'target', 'rel', 'download', 'class', 'id', 'aria-label', 'data-analytics']
         const anchorAttrs: Record<string, any> = {}
         for (const key of validAttrs) {
-            if (attrs[key] !== undefined) anchorAttrs[key] = attrs[key]
+            if (attrs[key]) anchorAttrs[key] = attrs[key]
         }
         const attrStr = Object.entries(anchorAttrs)
             .map(([k, v]) => ` ${k}="${v}"`).join('')
