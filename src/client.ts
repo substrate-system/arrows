@@ -7,6 +7,14 @@ import { SubstrateLink } from './links.js'
  * this is an empty file.
  */
 
+// for docuement.querySelector
+declare global {
+    interface HTMLElementTagNameMap {
+        'substrate-back':SubstrateBack
+        'substrate-next':SubstrateNext
+    }
+}
+
 export class AnchorNext extends SubstrateLink {
     static TAG = 'anchor-next'
 
