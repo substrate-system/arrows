@@ -10,9 +10,17 @@ export const SubstrateBack = {
         </substrate-back>`
     },
     html (attrs:Record<string, any> = {}):string {
-        const attrStr = toAttributes(attrs)
+        const extraAttrs: Record<string, any> = { ...attrs }
+        if (attrs.disabled) {
+            extraAttrs['aria-label'] = attrs['aria-label'] || 'Back'
+            extraAttrs['aria-disabled'] = 'true'
+        } else if ('aria-label' in attrs) {
+            extraAttrs['aria-label'] = attrs['aria-label']
+        }
+        const attrStr = toAttributes(extraAttrs)
+        const svg = back.replace('<svg', '<svg role="img" aria-hidden="true"')
         return `<button${attrStr ? ' ' + attrStr : ''}>
-            ${back}
+            ${svg}
             <span class="visually-hidden">Back</span>
         </button>`
     }
@@ -27,9 +35,17 @@ export const SubstrateNext = {
         </substrate-next>`
     },
     html (attrs:Record<string, any> = {}):string {
-        const attrStr = toAttributes(attrs)
+        const extraAttrs: Record<string, any> = { ...attrs }
+        if (attrs.disabled) {
+            extraAttrs['aria-label'] = attrs['aria-label'] || 'Next'
+            extraAttrs['aria-disabled'] = 'true'
+        } else if ('aria-label' in attrs) {
+            extraAttrs['aria-label'] = attrs['aria-label']
+        }
+        const attrStr = toAttributes(extraAttrs)
+        const svg = next.replace('<svg', '<svg role="img" aria-hidden="true"')
         return `<button${attrStr ? ' ' + attrStr : ''}>
-            ${next}
+            ${svg}
             <span class="visually-hidden">Next</span>
         </button>`
     }
@@ -50,19 +66,24 @@ export const AnchorBack = {
     },
     html (attrs:Record<string, any> = {}):string {
         // Only pass valid <a> attributes
-        const validAttrs = ['href', 'target', 'rel', 'download', 'class', 'id',
-            'aria-label', 'data-analytics']
-        const anchorAttrs:Record<string, string> = {}
+        const validAttrs = ['href', 'target', 'rel', 'download', 'class',
+            'id', 'aria-label', 'data-analytics']
+        const anchorAttrs: Record<string, string> = {}
         for (const key of validAttrs) {
             if (attrs[key]) anchorAttrs[key] = attrs[key]
         }
         if (attrs.disabled) {
             delete anchorAttrs.href
+            anchorAttrs['aria-label'] = attrs['aria-label'] || 'Back'
+            anchorAttrs['aria-disabled'] = 'true'
+        } else if ('aria-label' in attrs) {
+            anchorAttrs['aria-label'] = attrs['aria-label']
         }
         const attrStr = Object.entries(anchorAttrs)
             .map(([k, v]) => ` ${k}="${v}"`).join('')
+        const svg = back.replace('<svg', '<svg role="img" aria-hidden="true"')
         return `<a${attrStr}>
-            ${back}
+            ${svg}
             <span class="visually-hidden">Back</span>
         </a>`
     }
@@ -91,11 +112,16 @@ export const AnchorNext = {
         }
         if (attrs.disabled) {
             delete anchorAttrs.href
+            anchorAttrs['aria-label'] = attrs['aria-label'] || 'Next'
+            anchorAttrs['aria-disabled'] = 'true'
+        } else if ('aria-label' in attrs) {
+            anchorAttrs['aria-label'] = attrs['aria-label']
         }
         const attrStr = Object.entries(anchorAttrs)
             .map(([k, v]) => ` ${k}="${v}"`).join('')
+        const svg = next.replace('<svg', '<svg role="img" aria-hidden="true"')
         return `<a${attrStr}>
-            ${next}
+            ${svg}
             <span class="visually-hidden">Next</span>
         </a>`
     }

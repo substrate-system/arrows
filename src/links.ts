@@ -70,20 +70,25 @@ export class SubstrateLink extends HTMLElement {
     }
 
     set disabled (value:boolean) {
+        const a = this.qs('a')
         if (value) {
             // disable
             this.classList.add('disabled')
             this.setAttribute('disabled', '')
-            const a = this.qs('a')
             a?.removeAttribute('href')
+            a?.setAttribute('aria-disabled', 'true')
+            a?.setAttribute('aria-label',
+                this instanceof AnchorBack ? 'Back' : 'Next')
         } else {
             // enable
             const h = this.href
             this.classList.remove('disabled')
             if (this.hasAttribute('disabled')) this.removeAttribute('disabled')
             setTimeout(() => {
-                const a = this.qs('a')
                 a?.setAttribute('href', h)
+                a?.removeAttribute('aria-disabled')
+                a?.setAttribute('aria-label',
+                    this instanceof AnchorBack ? 'Back' : 'Next')
             }, 0)
         }
     }
@@ -121,10 +126,15 @@ export class AnchorNext extends SubstrateLink {
         const h = this.href
         const html = AnchorNext.html({ href: h })
         this.innerHTML = html
-
+        const a = this.qs('a')
         const isDisabled = this.hasAttribute('disabled')
         if (isDisabled) {
-            this.qs('a')?.removeAttribute('href')
+            a?.removeAttribute('href')
+            a?.setAttribute('aria-disabled', 'true')
+            a?.setAttribute('aria-label', 'Next')
+        } else {
+            a?.setAttribute('aria-label', 'Next')
+            a?.removeAttribute('aria-disabled')
         }
     }
 }
@@ -140,9 +150,15 @@ export class AnchorBack extends SubstrateLink {
         const href = this.href
         const html = AnchorBack.html({ href })
         this.innerHTML = html
+        const a = this.qs('a')
         const isDisabled = this.hasAttribute('disabled')
         if (isDisabled) {
-            this.qs('a')?.removeAttribute('href')
+            a?.removeAttribute('href')
+            a?.setAttribute('aria-disabled', 'true')
+            a?.setAttribute('aria-label', 'Back')
+        } else {
+            a?.setAttribute('aria-label', 'Back')
+            a?.removeAttribute('aria-disabled')
         }
     }
 }
