@@ -67,14 +67,14 @@ export class SubstrateLink extends HTMLElement {
         if (value) {
             // disable
             this.classList.add('disabled')
+            this.setAttribute('disabled', '')
             setTimeout(() => {
                 const a = this.qs('a')
                 a?.removeAttribute('href')
             }, 0)
         } else {
             // enable
-            const h = this.getAttribute('href')
-            if (!h) throw new Error('not href')
+            const h = this.href
             this.classList.remove('disabled')
             if (this.hasAttribute('disabled')) this.removeAttribute('disabled')
             setTimeout(() => {
