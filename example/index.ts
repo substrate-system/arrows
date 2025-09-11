@@ -21,7 +21,7 @@ document.body.innerHTML += `
     <substrate-next></substrate-next>
 
     <h2>Links</h2>
-    <anchor-back id="linkback" href="fooo"></anchor-back>
+    <anchor-back disabled id="linkback" href="fooo"></anchor-back>
     <anchor-next id="linknext" href="barrr"></anchor-next>
 
 
