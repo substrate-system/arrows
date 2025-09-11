@@ -29,8 +29,10 @@ export class SubstrateLink extends HTMLElement {
     connectedCallback () {
         this.render()
         if (this.hasAttribute('disabled')) {
-            this.qs('a')?.removeAttribute('href')
-            this.classList.add('disabled')
+            setTimeout(() => {
+                this.qs('a')?.removeAttribute('href')
+                this.classList.add('disabled')
+            }, 0)
         }
     }
 

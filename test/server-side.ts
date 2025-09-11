@@ -157,3 +157,34 @@ test('should work with no attributes (backward compatibility)', async t => {
     t.ok(nextOuter.includes('<anchor-next>'),
         'should render custom element without attrs')
 })
+
+test('Anchor tags static HTML disables href when disabled: true', async t => {
+    function getAnchorTag (html) {
+        const match = html.match(/<a[^>]*>(.|\n)*?<\/a>/)
+        return match ? match[0] : ''
+    }
+
+    const backHtml = AnchorBack.html({ href: '/abc', disabled: true })
+    const backA = getAnchorTag(backHtml)
+    t.ok(backA.includes('<a'), 'should still render an <a> tag')
+    t.ok(!backA.includes('href="/abc"'),
+        'AnchorBack.html <a> should not include href when disabled')
+
+    const nextHtml = AnchorNext.html({ href: '/def', disabled: true })
+    const nextA = getAnchorTag(nextHtml)
+    t.ok(nextA.includes('<a'), 'should still render an <a> tag')
+    t.ok(!nextA.includes('href="/def"'),
+        'AnchorNext.html <a> should not include href when disabled')
+
+    const backOuter = AnchorBack.outerHTML({ href: '/abc', disabled: true })
+    const backOuterA = getAnchorTag(backOuter)
+    t.ok(backOuterA.includes('<a'), 'should still render an <a> tag')
+    t.ok(!backOuterA.includes('href="/abc"'),
+        'AnchorBack.outerHTML <a> should not include href when disabled')
+
+    const nextOuter = AnchorNext.outerHTML({ href: '/def', disabled: true })
+    const nextOuterA = getAnchorTag(nextOuter)
+    t.ok(nextOuterA.includes('<a'), 'should still render an <a> tag')
+    t.ok(!nextOuterA.includes('href="/def"'),
+        'AnchorNext.outerHTML <a> should not include href when disabled')
+})

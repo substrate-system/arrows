@@ -1,10 +1,7 @@
 import { qs } from '@substrate-system/web-component/qs'
 import { SubstrateBack, SubstrateNext } from '../src/index.js'
 import '@substrate-system/a11y/visually-hidden'
-import {
-    AnchorBack,
-    AnchorNext
-} from '../src/links.js'
+import { AnchorBack, AnchorNext } from '../src/links.js'
 import '../src/index.css'
 import './index.css'
 import Debug from '@substrate-system/debug'

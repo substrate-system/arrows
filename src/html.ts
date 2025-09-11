@@ -38,7 +38,12 @@ export const SubstrateNext = {
 export const AnchorBack = {
     TAG: 'anchor-back',
     outerHTML (attrs:Record<string, any> = {}):string {
-        const attrStr = toAttributes(attrs)
+        // Remove href from custom element if disabled
+        const attrsCopy = { ...attrs }
+        if (attrsCopy.disabled) {
+            delete attrsCopy.href
+        }
+        const attrStr = toAttributes(attrsCopy)
         return `<anchor-back${attrStr ? ' ' + attrStr : ''}>
             ${this.html(attrs)}
         </anchor-back>`
@@ -50,6 +55,9 @@ export const AnchorBack = {
         const anchorAttrs:Record<string, string> = {}
         for (const key of validAttrs) {
             if (attrs[key]) anchorAttrs[key] = attrs[key]
+        }
+        if (attrs.disabled) {
+            delete anchorAttrs.href
         }
         const attrStr = Object.entries(anchorAttrs)
             .map(([k, v]) => ` ${k}="${v}"`).join('')
@@ -63,17 +71,26 @@ export const AnchorBack = {
 export const AnchorNext = {
     TAG: 'anchor-next',
     outerHTML (attrs:Record<string, any> = {}):string {
-        const attrStr = toAttributes(attrs)
+        // Remove href from custom element if disabled
+        const attrsCopy = { ...attrs }
+        if (attrsCopy.disabled) {
+            delete attrsCopy.href
+        }
+        const attrStr = toAttributes(attrsCopy)
         return `<anchor-next${attrStr ? ' ' + attrStr : ''}>
             ${this.html(attrs)}
         </anchor-next>`
     },
     html (attrs:Record<string, any> = {}):string {
         // Only pass valid <a> attributes
-        const validAttrs = ['href', 'target', 'rel', 'download', 'class', 'id', 'aria-label', 'data-analytics']
+        const validAttrs = ['href', 'target', 'rel', 'download', 'class',
+            'id', 'aria-label', 'data-analytics']
         const anchorAttrs: Record<string, any> = {}
         for (const key of validAttrs) {
             if (attrs[key]) anchorAttrs[key] = attrs[key]
+        }
+        if (attrs.disabled) {
+            delete anchorAttrs.href
         }
         const attrStr = Object.entries(anchorAttrs)
             .map(([k, v]) => ` ${k}="${v}"`).join('')
