@@ -35,9 +35,9 @@ document.body.innerHTML += `
 
 qs('#linkdisable')?.addEventListener('click', () => {
     debug('dsiable the links...')
-    const links = [qs('#linkback'), qs('#linknext')]
+    const links = [qs('#linkback'), qs('#linknext')] as (AnchorBack|AnchorNext)[]
     links.forEach(link => {
-        link?.setAttribute('disabled', '')
+        link.disabled = true
     })
 })
 qs('#linkenable')?.addEventListener('click', () => {

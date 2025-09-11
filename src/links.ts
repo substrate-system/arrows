@@ -68,10 +68,8 @@ export class SubstrateLink extends HTMLElement {
             // disable
             this.classList.add('disabled')
             this.setAttribute('disabled', '')
-            setTimeout(() => {
-                const a = this.qs('a')
-                a?.removeAttribute('href')
-            }, 0)
+            const a = this.qs('a')
+            a?.removeAttribute('href')
         } else {
             // enable
             const h = this.href
@@ -114,9 +112,14 @@ export class AnchorNext extends SubstrateLink {
     }
 
     render () {
-        const h = this.getAttribute('href')
+        const h = this.href
         const html = AnchorNext.html({ href: h })
         this.innerHTML = html
+
+        const isDisabled = this.hasAttribute('disabled')
+        if (isDisabled) {
+            this.qs('a')?.removeAttribute('href')
+        }
     }
 }
 
@@ -128,8 +131,12 @@ export class AnchorBack extends SubstrateLink {
     }
 
     render () {
-        const href = this.getAttribute('href')
+        const href = this.href
         const html = AnchorBack.html({ href })
         this.innerHTML = html
+        const isDisabled = this.hasAttribute('disabled')
+        if (isDisabled) {
+            this.qs('a')?.removeAttribute('href')
+        }
     }
 }
