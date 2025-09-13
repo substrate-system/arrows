@@ -11,12 +11,11 @@ declare global {
 export class SubstrateLink extends HTMLElement {
     static observedAttributes = ['disabled', 'href']
     static TAG:string
-    href:string
+    href:string|null
 
     constructor () {
         super()
         const href = this.getAttribute('href')
-        if (!href) throw new Error('not href')
         this.href = href
     }
 
@@ -54,7 +53,7 @@ export class SubstrateLink extends HTMLElement {
                 this.qs('a')?.removeAttribute('href')
             } else {
                 // not disabled
-                this.qs('a')?.setAttribute('href', this.href)
+                this.qs('a')?.setAttribute('href', this.href!)
             }
         }
     }
@@ -81,7 +80,7 @@ export class SubstrateLink extends HTMLElement {
                 this instanceof AnchorBack ? 'Back' : 'Next')
         } else {
             // enable
-            const h = this.href
+            const h = this.href!
             this.classList.remove('disabled')
             if (this.hasAttribute('disabled')) this.removeAttribute('disabled')
             setTimeout(() => {
