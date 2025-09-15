@@ -53,7 +53,11 @@ export class SubstrateLink extends HTMLElement {
                 this.qs('a')?.removeAttribute('href')
             } else {
                 // not disabled
-                this.qs('a')?.setAttribute('href', this.href!)
+                if (this.href) {
+                    this.qs('a')?.setAttribute('href', this.href)
+                } else {
+                    this.qs('a')?.removeAttribute('href')
+                }
             }
         }
     }
@@ -80,11 +84,15 @@ export class SubstrateLink extends HTMLElement {
                 this instanceof AnchorBack ? 'Back' : 'Next')
         } else {
             // enable
-            const h = this.href!
+            const h = this.href
             this.classList.remove('disabled')
             if (this.hasAttribute('disabled')) this.removeAttribute('disabled')
             setTimeout(() => {
-                a?.setAttribute('href', h)
+                if (h) {
+                    a?.setAttribute('href', h)
+                } else {
+                    a?.removeAttribute('href')
+                }
                 a?.removeAttribute('aria-disabled')
                 a?.setAttribute('aria-label',
                     this instanceof AnchorBack ? 'Back' : 'Next')

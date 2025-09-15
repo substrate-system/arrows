@@ -96,6 +96,55 @@ test('define client-side anchor back and anchor next', t => {
     t.ok(true, "didn't throw")
 })
 
+test('href should not become string "null" when enabling with null href', async t => {
+    t.plan(7)
+
+    // Create pre-rendered HTML as would come from server-side rendering
+    // This simulates the scenario where the server renders without href
+    document.body.innerHTML += `
+        <anchor-back class="test-null-fix">
+            <a>
+                <svg role="img" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 1 1.3 6.326a.91.91 0 0 0 0 1.348L7 13"/>
+                </svg>
+                <span class="visually-hidden">Back</span>
+            </a>
+        </anchor-back>
+    `
+
+    const el = document.querySelector('anchor-back.test-null-fix') as AnchorBackClient
+    t.ok(el, 'should find the anchor element')
+
+    const a = el.querySelector('a')
+    t.ok(a, 'should find the nested anchor element')
+
+    // Manually set href to null to simulate the problematic state
+    el.href = null
+    t.equal(el.href, null, 'element href property should be null')
+    t.ok(!a.hasAttribute('href'), 'anchor should not have href attribute initially')
+
+    // Trigger the code path that previously caused href="null"
+    el.disabled = false
+
+    // Verify fix: href should remain null, not become string "null"
+    await new Promise<void>((resolve) => {
+        setTimeout(() => {
+            const href = a.getAttribute('href')
+            if (href === 'null') {
+                t.fail('Bug: href became the string "null" instead of staying null')
+            } else if (href === null) {
+                t.ok(true, 'href correctly remains null when original href was null')
+            } else {
+                t.fail('unexpected href value: ' + href)
+            }
+
+            // Check that element href property is still null
+            t.equal(el.href, null, 'element href property should remain null')
+            resolve()
+        }, 50)
+    })
+})
+
 test('all done', () => {
     // @ts-expect-error testing
     window.testsFinished = true
