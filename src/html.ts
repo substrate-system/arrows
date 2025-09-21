@@ -4,7 +4,8 @@ import { back, next } from './svg.js'
 export const SubstrateBack = {
     TAG: 'substrate-back',
     outerHTML (attrs:Record<string, any> = {}):string {
-        const attrStr = toAttributes(attrs)
+        const customElementAttrs = { role: 'button', ...attrs }
+        const attrStr = toAttributes(customElementAttrs)
         return `<substrate-back${attrStr ? ' ' + attrStr : ''}>
             ${this.html(attrs)}
         </substrate-back>`
@@ -14,8 +15,8 @@ export const SubstrateBack = {
         if (attrs.disabled) {
             extraAttrs['aria-label'] = attrs['aria-label'] || 'Back'
             extraAttrs['aria-disabled'] = 'true'
-        } else if ('aria-label' in attrs) {
-            extraAttrs['aria-label'] = attrs['aria-label']
+        } else {
+            extraAttrs['aria-label'] = attrs['aria-label'] || 'Back'
         }
         const attrStr = toAttributes(extraAttrs)
         const svg = back.replace('<svg', '<svg role="img" aria-hidden="true"')
@@ -29,7 +30,8 @@ export const SubstrateBack = {
 export const SubstrateNext = {
     TAG: 'substrate-next',
     outerHTML (attrs:Record<string, any> = {}):string {
-        const attrStr = toAttributes(attrs)
+        const customElementAttrs = { role: 'button', ...attrs }
+        const attrStr = toAttributes(customElementAttrs)
         return `<substrate-next${attrStr ? ' ' + attrStr : ''}>
             ${this.html(attrs)}
         </substrate-next>`
@@ -39,8 +41,8 @@ export const SubstrateNext = {
         if (attrs.disabled) {
             extraAttrs['aria-label'] = attrs['aria-label'] || 'Next'
             extraAttrs['aria-disabled'] = 'true'
-        } else if ('aria-label' in attrs) {
-            extraAttrs['aria-label'] = attrs['aria-label']
+        } else {
+            extraAttrs['aria-label'] = attrs['aria-label'] || 'Next'
         }
         const attrStr = toAttributes(extraAttrs)
         const svg = next.replace('<svg', '<svg role="img" aria-hidden="true"')
@@ -59,7 +61,8 @@ export const AnchorBack = {
         if (attrsCopy.disabled) {
             delete attrsCopy.href
         }
-        const attrStr = toAttributes(attrsCopy)
+        const customElementAttrs = { role: 'navigation', ...attrsCopy }
+        const attrStr = toAttributes(customElementAttrs)
         return `<anchor-back${attrStr ? ' ' + attrStr : ''}>
             ${this.html(attrs)}
         </anchor-back>`
@@ -76,8 +79,8 @@ export const AnchorBack = {
             delete anchorAttrs.href
             anchorAttrs['aria-label'] = attrs['aria-label'] || 'Back'
             anchorAttrs['aria-disabled'] = 'true'
-        } else if ('aria-label' in attrs) {
-            anchorAttrs['aria-label'] = attrs['aria-label']
+        } else {
+            anchorAttrs['aria-label'] = attrs['aria-label'] || 'Back'
         }
         const attrStr = Object.entries(anchorAttrs)
             .map(([k, v]) => ` ${k}="${v}"`).join('')
@@ -97,7 +100,8 @@ export const AnchorNext = {
         if (attrsCopy.disabled) {
             delete attrsCopy.href
         }
-        const attrStr = toAttributes(attrsCopy)
+        const customElementAttrs = { role: 'navigation', ...attrsCopy }
+        const attrStr = toAttributes(customElementAttrs)
         return `<anchor-next${attrStr ? ' ' + attrStr : ''}>
             ${this.html(attrs)}
         </anchor-next>`
@@ -114,8 +118,8 @@ export const AnchorNext = {
             delete anchorAttrs.href
             anchorAttrs['aria-label'] = attrs['aria-label'] || 'Next'
             anchorAttrs['aria-disabled'] = 'true'
-        } else if ('aria-label' in attrs) {
-            anchorAttrs['aria-label'] = attrs['aria-label']
+        } else {
+            anchorAttrs['aria-label'] = attrs['aria-label'] || 'Next'
         }
         const attrStr = Object.entries(anchorAttrs)
             .map(([k, v]) => ` ${k}="${v}"`).join('')
