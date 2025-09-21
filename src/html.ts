@@ -10,6 +10,7 @@ export const SubstrateBack = {
             ${this.html(attrs)}
         </substrate-back>`
     },
+
     html (attrs:Record<string, any> = {}):string {
         const extraAttrs: Record<string, any> = { ...attrs }
         if (attrs.disabled) {
@@ -19,9 +20,8 @@ export const SubstrateBack = {
             extraAttrs['aria-label'] = attrs['aria-label'] || 'Back'
         }
         const attrStr = toAttributes(extraAttrs)
-        const svg = back.replace('<svg', '<svg role="img" aria-hidden="true"')
         return `<button${attrStr ? ' ' + attrStr : ''}>
-            ${svg}
+            ${back}
             <span class="visually-hidden">Back</span>
         </button>`
     }
@@ -29,6 +29,7 @@ export const SubstrateBack = {
 
 export const SubstrateNext = {
     TAG: 'substrate-next',
+
     outerHTML (attrs:Record<string, any> = {}):string {
         const customElementAttrs = { role: 'button', ...attrs }
         const attrStr = toAttributes(customElementAttrs)
@@ -36,6 +37,7 @@ export const SubstrateNext = {
             ${this.html(attrs)}
         </substrate-next>`
     },
+
     html (attrs:Record<string, any> = {}):string {
         const extraAttrs: Record<string, any> = { ...attrs }
         if (attrs.disabled) {
@@ -45,9 +47,8 @@ export const SubstrateNext = {
             extraAttrs['aria-label'] = attrs['aria-label'] || 'Next'
         }
         const attrStr = toAttributes(extraAttrs)
-        const svg = next.replace('<svg', '<svg role="img" aria-hidden="true"')
         return `<button${attrStr ? ' ' + attrStr : ''}>
-            ${svg}
+            ${next}
             <span class="visually-hidden">Next</span>
         </button>`
     }
@@ -67,6 +68,7 @@ export const AnchorBack = {
             ${this.html(attrs)}
         </anchor-back>`
     },
+
     html (attrs:Record<string, any> = {}):string {
         // Only pass valid <a> attributes
         const validAttrs = ['href', 'target', 'rel', 'download', 'class',
@@ -84,9 +86,8 @@ export const AnchorBack = {
         }
         const attrStr = Object.entries(anchorAttrs)
             .map(([k, v]) => ` ${k}="${v}"`).join('')
-        const svg = back.replace('<svg', '<svg role="img" aria-hidden="true"')
         return `<a${attrStr}>
-            ${svg}
+            ${back}
             <span class="visually-hidden">Back</span>
         </a>`
     }
@@ -106,6 +107,7 @@ export const AnchorNext = {
             ${this.html(attrs)}
         </anchor-next>`
     },
+
     html (attrs:Record<string, any> = {}):string {
         // Only pass valid <a> attributes
         const validAttrs = ['href', 'target', 'rel', 'download', 'class',
@@ -123,9 +125,8 @@ export const AnchorNext = {
         }
         const attrStr = Object.entries(anchorAttrs)
             .map(([k, v]) => ` ${k}="${v}"`).join('')
-        const svg = next.replace('<svg', '<svg role="img" aria-hidden="true"')
         return `<a${attrStr}>
-            ${svg}
+            ${next}
             <span class="visually-hidden">Next</span>
         </a>`
     }

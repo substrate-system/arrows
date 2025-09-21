@@ -1,4 +1,7 @@
 import * as ssr from './html.js'
+import {
+    AnchorBack as ClientAnchorBack,
+} from './client.js'
 
 // for docuement.querySelector
 declare global {
@@ -81,7 +84,10 @@ export class SubstrateLink extends HTMLElement {
             a?.removeAttribute('href')
             a?.setAttribute('aria-disabled', 'true')
             a?.setAttribute('aria-label',
-                this instanceof AnchorBack ? 'Back' : 'Next')
+                (
+                    this instanceof AnchorBack ||
+                    this instanceof ClientAnchorBack
+                ) ? 'Back' : 'Next')
         } else {
             // enable
             const h = this.href
@@ -95,7 +101,10 @@ export class SubstrateLink extends HTMLElement {
                 }
                 a?.removeAttribute('aria-disabled')
                 a?.setAttribute('aria-label',
-                    this instanceof AnchorBack ? 'Back' : 'Next')
+                    (
+                        this instanceof AnchorBack ||
+                        this instanceof ClientAnchorBack
+                    ) ? 'Back' : 'Next')
             }, 0)
         }
     }

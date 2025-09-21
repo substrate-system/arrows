@@ -1,6 +1,6 @@
 export const back = `
 <?xml version="1.0" ?>
-<svg viewBox="-20 -20 552 552" xmlns="http://www.w3.org/2000/svg">
+<svg role="img" aria-hidden="true" viewBox="-20 -20 552 552" xmlns="http://www.w3.org/2000/svg">
 <title>Back arrow icon</title>
 <defs>
 <style>.cls-1{fill:none;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:20px;}</style>
@@ -15,7 +15,7 @@ export const back = `
 `
 
 export const next = `<?xml version="1.0" ?>
-<svg viewBox="-20 -20 552 552" xmlns="http://www.w3.org/2000/svg">
+<svg role="img" aria-hidden="true" viewBox="-20 -20 552 552" xmlns="http://www.w3.org/2000/svg">
 <title>Next arrow icon</title>
 <defs>
 <style>.cls-1{fill:none;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:20px;}</style>
